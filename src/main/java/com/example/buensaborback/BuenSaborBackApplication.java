@@ -27,7 +27,7 @@ public class BuenSaborBackApplication {
 		SpringApplication.run(BuenSaborBackApplication.class, args);
 		logger.info("Estoy activo en el main Alberto");
 	}
-/*
+
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -615,7 +615,7 @@ public class BuenSaborBackApplication {
 			logger.info("----------------Pedido ---------------------");
 			logger.info("{}",pedido);
 		};
-	}
-		};
 	}*/
+		};
+	}
 }
