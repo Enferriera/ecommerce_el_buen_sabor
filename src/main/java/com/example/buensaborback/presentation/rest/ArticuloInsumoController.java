@@ -7,6 +7,7 @@ import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloMan
 import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoDto;
 import com.example.buensaborback.domain.entities.ArticuloInsumo;
 import com.example.buensaborback.presentation.rest.Base.BaseControllerImp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/articulosInsumos")
 @CrossOrigin("*")
-public class ArticuloInsumoController extends BaseControllerImp<ArticuloInsumo, ArticuloInsumoDto, ArticuloInsumoDto,Long, ArticuloInsumoFacadeImp> {
+public class ArticuloInsumoController  {
 
-    public ArticuloInsumoController(ArticuloInsumoFacadeImp facade) {
-        super(facade);
-    }
-
+  @Autowired
+  private ArticuloInsumoFacadeImp facade;
     @GetMapping("/buscar/elaborados")
     public ResponseEntity<List<ArticuloInsumoDto>> findByEsParaElaborarTrue() {
         //logger.info("INICIO GET ALL insumos PARA ELABORAR");
@@ -35,15 +34,6 @@ public class ArticuloInsumoController extends BaseControllerImp<ArticuloInsumo, 
         return ResponseEntity.ok().body(facade.findByEsParaElaborarFalse());
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<ArticuloInsumoDto> create(@RequestBody ArticuloInsumoCreateDto dto) {
-        return ResponseEntity.ok().body(facade.create(dto));
-    }
 
-    @PutMapping("/changeHabilitado/{id}")
-    public ResponseEntity<?> changeHabilitado(@PathVariable Long id){
-        facade.changeHabilitado(id);
-        return ResponseEntity.ok().body("Se cambio el estado del Insuomo");
-    }
 
 }

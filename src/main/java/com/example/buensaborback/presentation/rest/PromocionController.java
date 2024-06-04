@@ -3,6 +3,7 @@ package com.example.buensaborback.presentation.rest;
 
 import com.example.buensaborback.business.facade.Imp.PromocionFacadeImpl;
 
+import com.example.buensaborback.business.facade.PromocionFacade;
 import com.example.buensaborback.domain.dto.promocionDto.PromocionCreateDto;
 import com.example.buensaborback.domain.dto.promocionDto.PromocionDto;
 
@@ -15,27 +16,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/promociones")
 @CrossOrigin(origins="*")
-public class PromocionController extends BaseControllerImp<Promocion, PromocionDto, PromocionDto,Long, PromocionFacadeImpl> {
-    public PromocionController(PromocionFacadeImpl facade) {
-        super(facade);
-    }
+public class PromocionController {
+
 
     @Autowired
-    private PromocionFacadeImpl promocionFacade;
+    private PromocionFacade promocionFacade;
 
-    @PostMapping("/create")
-    public ResponseEntity<PromocionDto> create(@RequestBody PromocionCreateDto dto) {
-        return ResponseEntity.ok().body(promocionFacade.create(dto));
-    }
 
-    @PutMapping("/changeHabilitado/{id}")
-    public ResponseEntity<?> changeHabilitado(@PathVariable Long id){
-        facade.changeHabilitado(id);
-        return ResponseEntity.ok().body("Se cambio el estado del Promocion");
-    }
 
     @GetMapping("/getHabilitados")
     public ResponseEntity<?> getHabilitados(){
-        return ResponseEntity.ok().body(facade.getHabilitados());
+        return ResponseEntity.ok().body(promocionFacade.getHabilitados());
     }
 }

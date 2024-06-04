@@ -16,10 +16,7 @@ public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto,Emp
         super(facade);
     }
 
-    @PutMapping("/addSucursal")
-    public ResponseEntity<EmpresaLargeDto> addSucursal(@RequestParam Long idEmpresa, @RequestParam Long idSucursal){
-        return ResponseEntity.ok(facade.addSucursal(idEmpresa,idSucursal));
-    }
+
 
     @GetMapping("/full/{idEmpresa}")
     public ResponseEntity<EmpresaLargeDto> getEmpresaSucursales(@PathVariable Long idEmpresa) {
