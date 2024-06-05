@@ -12,13 +12,44 @@ import com.example.buensaborback.domain.enums.TipoEnvio;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring", uses = {DetallePedidoMapper.class,EmpleadoMapper.class, ClienteService.class, DomicilioMapper.class, FormaPago.class, Estado.class, TipoEnvio.class, SucursalMapper.class, SucursalService.class, UsuarioMapper.class, ClienteMapper.class})
 public interface PedidoMapper extends BaseMapper<Pedido, PedidoDto, PedidoDto> {
 @Mappings({
         @Mapping(source = "idCliente", target = "cliente", qualifiedByName = "getById"),
         @Mapping(source = "idSucursal", target = "sucursal", qualifiedByName = "getById"),
+        @Mapping(source = "formaPago", target = "formaPago", qualifiedByName = "stringToFormaPago"),
+        @Mapping(source = "tipoEnvio", target = "tipoEnvio", qualifiedByName = "stringToTipoEnvio"),
+        @Mapping(source = "estado", target = "estado", qualifiedByName = "stringToEstado")
 })
 
     Pedido toCreateEntity(PedidoCreateDto source);
+
+    @Named("stringToFormaPago")
+    default FormaPago stringToFormaPago(String formaPago) {
+        return FormaPago.valueOf(formaPago);
+    }
+
+    default String formaPagoToString(FormaPago formaPago) {
+        return formaPago.name();
+    }
+
+    @Named("stringToTipoEnvio")
+    default TipoEnvio stringToTipoEnvio(String tipoEnvio) {
+        return TipoEnvio.valueOf(tipoEnvio);
+    }
+
+    default String tipoEnvioToString(TipoEnvio tipoEnvio) {
+        return tipoEnvio.name();
+    }
+
+    @Named("stringToEstado")
+    default Estado stringToEstado(String estado) {
+        return Estado.valueOf(estado);
+    }
+
+    default String EstadoToString(Estado estado) {
+        return estado.name();
+    }
 }

@@ -27,7 +27,7 @@ public class PedidoDto extends BaseDto {
 
     private LocalTime horaEstimadaFinalizacion;
     private Double total;
-    private Double totalCosto;
+   // private Double totalCosto;
     private Estado estado;
     private TipoEnvio tipoEnvio;
     private FormaPago formaPago;
