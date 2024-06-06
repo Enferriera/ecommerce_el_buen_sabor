@@ -21,4 +21,13 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long>{
             "JOIN SUCURSAL s ON sc.SUCURSAL_ID = s.ID\n" +
             "WHERE s.ID = ?1", nativeQuery = true)
     List<Categoria> getCategoriasBySucursal(Long idSucursal);
+
+    @Query("SELECT DISTINCT c FROM Categoria c " +
+            "JOIN c.sucursales s " +
+            "JOIN c.articulos a " +
+            "LEFT JOIN ArticuloInsumo ai ON a.id = ai.id " +
+            "LEFT JOIN ArticuloManufacturado am ON a.id = am.id " +
+            "WHERE s.id = :sucursalId " +
+            "AND ((am.habilitado = true AND am.eliminado=false) OR (ai.habilitado = true AND ai.eliminado =false AND ai.esParaElaborar = false OR ai.esParaElaborar IS NULL))")
+    List<Categoria> findCategoriasBySucursalAndArticuloType(@Param("sucursalId") Long sucursalId);
 }

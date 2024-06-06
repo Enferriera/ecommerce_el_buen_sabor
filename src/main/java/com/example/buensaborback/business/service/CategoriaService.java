@@ -6,6 +6,7 @@ import com.example.buensaborback.domain.entities.Categoria;
 import com.example.buensaborback.domain.entities.Sucursal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface CategoriaService extends BaseService<Categoria,Long> {
     List<Categoria> findByEsInsumoFalse();
 
     void deleteInSucursales(Long id, SucursalShortDto sucursal);
+    List<Categoria> findCategoriasBySucursalAndArticuloType( Long sucursalId);
 }
