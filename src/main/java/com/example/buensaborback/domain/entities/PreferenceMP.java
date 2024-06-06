@@ -1,4 +1,4 @@
-package com.example.buensaborback.presentation.rest;
+package com.example.buensaborback.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

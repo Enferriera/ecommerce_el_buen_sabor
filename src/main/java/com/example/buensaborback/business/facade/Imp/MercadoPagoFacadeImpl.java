@@ -5,7 +5,7 @@ import com.example.buensaborback.business.facade.MercadoPagoFacade;
 import com.example.buensaborback.business.mapper.PedidoMapper;
 import com.example.buensaborback.domain.dto.pedidoDto.PedidoDto;
 import com.example.buensaborback.presentation.rest.MercadoPagoController;
-import com.example.buensaborback.presentation.rest.PreferenceMP;
+import com.example.buensaborback.domain.entities.PreferenceMP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

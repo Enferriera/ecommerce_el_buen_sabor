@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/domicilios")
-@CrossOrigin("*")
+@CrossOrigin(origins="*")
 public class DomicilioController extends BaseControllerImp<Domicilio, DomicilioDto,DomicilioDto,Long, DomicilioFacadeImp> {
     public DomicilioController(DomicilioFacadeImp facade) {
         super(facade);

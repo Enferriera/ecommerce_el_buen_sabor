@@ -1,6 +1,7 @@
 package com.example.buensaborback.presentation.rest;
 
 import com.example.buensaborback.domain.entities.Pedido;
+import com.example.buensaborback.domain.entities.PreferenceMP;
 import com.mercadopago.MercadoPagoConfig;
 import com.mercadopago.client.preference.*;
 import com.mercadopago.resources.preference.Preference;

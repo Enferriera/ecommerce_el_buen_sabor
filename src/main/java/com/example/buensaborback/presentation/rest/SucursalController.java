@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sucursales")
-@CrossOrigin("*")
+@CrossOrigin(origins="*")
 public class SucursalController {
     private static final Logger logger = LoggerFactory.getLogger(BaseServiceImp.class);
    @Autowired
