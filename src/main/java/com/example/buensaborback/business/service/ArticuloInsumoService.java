@@ -19,4 +19,6 @@ public interface ArticuloInsumoService extends BaseService<ArticuloInsumo,Long> 
     public Optional<ArticuloInsumo> findByCodigo(String codigo);
 
     public List<ArticuloInsumo> getHabilitadosByCategoriaNoParaElaborar(String categoria);
+
+    public Optional<ArticuloInsumo> getArticuloInsumoById(Long id);
 }

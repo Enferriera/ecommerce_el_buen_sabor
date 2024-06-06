@@ -13,4 +13,6 @@ public interface ArticuloInsumoFacade extends BaseFacade<ArticuloInsumoDto, Arti
     public ArticuloInsumoDto create(ArticuloInsumoCreateDto articuloInsumoCreateDto);
 
     public List<ArticuloInsumoDto> getHabilitadosByCategoriaNoParaElaborar(String categoria);
+
+    public ArticuloInsumoDto getInsumoById(Long id);
 }

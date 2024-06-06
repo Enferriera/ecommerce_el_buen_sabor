@@ -43,4 +43,5 @@ public interface ArticuloManufacturadoRepository extends BaseRepository<Articulo
             "WHERE a.habilitado = true AND s.id = :sucursalId AND c.denominacion = :categoriaNombre")
     List<ArticuloManufacturado> findHabilitadosBySucursalAndCategoria(@Param("sucursalId") Long sucursalId, @Param("categoriaNombre") String categoriaNombre);
 
+
 }

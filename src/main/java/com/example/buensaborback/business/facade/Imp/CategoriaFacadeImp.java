@@ -7,6 +7,7 @@ import com.example.buensaborback.business.mapper.CategoriaMapper;
 import com.example.buensaborback.business.mapper.SucursalMapper;
 import com.example.buensaborback.business.service.Base.BaseService;
 import com.example.buensaborback.business.service.CategoriaService;
+import com.example.buensaborback.domain.dto.CategoriaDtos.CategoriaDto;
 import com.example.buensaborback.domain.dto.CategoriaDtos.CategoriaPostDto;
 import com.example.buensaborback.domain.dto.CategoriaDtos.CategoriaGetDto;
 import com.example.buensaborback.domain.dto.SucursalDtos.SucursalShortDto;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,6 +73,11 @@ public class CategoriaFacadeImp extends BaseFacadeImp<Categoria, CategoriaGetDto
         Categoria categoria = categoriaMapper.toEntityCreate(dto);
         System.out.println("categoria: " + categoria.getId());
         return categoriaMapper.toDTO(categoriaService.create(categoria));
+    }
+
+    @Override
+    public CategoriaGetDto getCategoriaById(Long id) {
+        return categoriaMapper.toDTO(categoriaService.getCategoriaById(id));
     }
 
 }

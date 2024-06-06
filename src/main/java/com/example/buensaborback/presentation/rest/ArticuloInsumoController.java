@@ -40,6 +40,11 @@ public class ArticuloInsumoController  {
         return ResponseEntity.ok().body(facade.getHabilitadosByCategoriaNoParaElaborar(categoria));
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity getById(@PathVariable Long id){
+        return ResponseEntity.ok().body(facade.getInsumoById(id));
+    }
+
 
 
 }

@@ -25,4 +25,5 @@ public interface ArticuloInsumoRepository extends BaseRepository<ArticuloInsumo,
 
     List<ArticuloInsumo> findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(String categoria);
 
+    Optional<ArticuloInsumo> findById(Long id);
 }

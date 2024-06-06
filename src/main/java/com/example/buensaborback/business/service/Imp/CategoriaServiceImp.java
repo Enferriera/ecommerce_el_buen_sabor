@@ -105,6 +105,11 @@ public class CategoriaServiceImp extends BaseServiceImp<Categoria,Long> implemen
     }
 
     @Override
+    public Categoria getCategoriaById(Long id) {
+        return categoriaRepository.getById(id);
+    }
+
+    @Override
     @Transactional
     public Categoria update(Categoria newCategoria, Long id) {
         Categoria categoriaExistente = categoriaRepository.getById(id);

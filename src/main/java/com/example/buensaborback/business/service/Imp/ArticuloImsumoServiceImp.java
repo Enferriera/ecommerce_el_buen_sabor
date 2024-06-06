@@ -152,4 +152,9 @@ public class ArticuloImsumoServiceImp extends BaseServiceImp<ArticuloInsumo,Long
         return articuloInsumoRepository.findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(categoria);
     }
 
+    @Override
+    public Optional<ArticuloInsumo> getArticuloInsumoById(Long id) {
+        return articuloInsumoRepository.findById(id);
+    }
+
 }

@@ -35,5 +35,10 @@ public class CategoriaController  {
         return ResponseEntity.ok(facade.getCategoriaManufacturados());
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity getCategodiaById(@PathVariable Long id){
+        return ResponseEntity.ok().body(facade.getCategoriaById(id));
+    }
+
 
 }
