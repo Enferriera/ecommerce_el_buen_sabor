@@ -40,7 +40,7 @@ public interface ArticuloManufacturadoRepository extends BaseRepository<Articulo
 
             "JOIN a.categoria c " +
             "JOIN c.sucursales s " +
-            "WHERE a.habilitado = true AND s.id = :sucursalId AND c.denominacion = :categoriaNombre")
+            "WHERE a.habilitado = true AND a.eliminado=false AND s.id = :sucursalId AND c.denominacion = :categoriaNombre")
     List<ArticuloManufacturado> findHabilitadosBySucursalAndCategoria(@Param("sucursalId") Long sucursalId, @Param("categoriaNombre") String categoriaNombre);
 
 
