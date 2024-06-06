@@ -42,7 +42,7 @@ public class CategoriaController  {
         return ResponseEntity.ok(facade.findCategoriasBySucursalAndArticuloType(sucursalId));
     }
     @GetMapping("{id}")
-    public ResponseEntity getCategodiaById(@PathVariable Long id){
+    public ResponseEntity<CategoriaGetDto> getCategodiaById(@PathVariable Long id){
         return ResponseEntity.ok().body(facade.getCategoriaById(id));
 
     }
