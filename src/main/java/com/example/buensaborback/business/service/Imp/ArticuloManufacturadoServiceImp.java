@@ -8,10 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ArticuloManufacturadoServiceImp extends BaseServiceImp<ArticuloManufacturado,Long> implements ArticuloManufacturadoService {
@@ -129,6 +126,11 @@ public class ArticuloManufacturadoServiceImp extends BaseServiceImp<ArticuloManu
 
     public Optional<ArticuloManufacturado> findByCodigo(String codigo) {
         return articuloManufacturadoRepository.findByCodigo(codigo);
+    }
+
+    @Override
+    public List<ArticuloManufacturado> getHabilitadoByCategoria(String categoria) {
+        return articuloManufacturadoRepository.findByHabilitadoTrueAndCategoriaDenominacion(categoria);
     }
 
 
