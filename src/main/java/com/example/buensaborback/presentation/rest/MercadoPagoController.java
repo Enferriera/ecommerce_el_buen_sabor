@@ -12,16 +12,16 @@ import java.util.List;
 public class MercadoPagoController {
     public PreferenceMP getPreferenciaIdMercadoPago(Pedido pedido){
         try {
-            MercadoPagoConfig.setAccessToken("TEST-8938214283872723-052519-92ecd57450cc2945ff42176ba32d1a39-400595763");
+            MercadoPagoConfig.setAccessToken("TEST-2197248190321761-060522-927b66eea3a42048edb39d3ff5e8ff33-400595763");
             List<PreferenceItemRequest> items = new ArrayList<>();
 
 
             PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
                     .id(pedido.getId().toString())
-                    .title("Tienda de instrumentos")
+                    .title(pedido.getSucursal().getEmpresa().getNombre())
                     .currencyId("ARG")
                     .pictureUrl("https://www.mercadopago.com/org-img/MP3/home/logomp3.gif")
-                    .description("Descrição do Item")
+                    .description("Compra de comida")
                     .categoryId("art")
                     .quantity(1)
                     .unitPrice(new BigDecimal(pedido.getTotal().toString()))
