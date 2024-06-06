@@ -5,9 +5,7 @@ import com.example.buensaborback.domain.dto.DomicilioDto;
 import com.example.buensaborback.domain.entities.Domicilio;
 import com.example.buensaborback.presentation.rest.Base.BaseControllerImp;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,4 +17,8 @@ public class DomicilioController extends BaseControllerImp<Domicilio, DomicilioD
         super(facade);
     }
 
+    @GetMapping("/allPorUsuario/{id}")
+    public ResponseEntity<List<DomicilioDto>> getAllPorUsuario(@PathVariable Long id) {
+        return ResponseEntity.ok().body(facade.findAllByClienteId(id));
+    }
 }
