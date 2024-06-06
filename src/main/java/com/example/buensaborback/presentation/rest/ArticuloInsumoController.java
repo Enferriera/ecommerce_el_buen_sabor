@@ -40,6 +40,11 @@ public class ArticuloInsumoController  {
         return ResponseEntity.ok().body(facade.getHabilitadosByCategoriaNoParaElaborar(categoria));
     }
 
+    @GetMapping("/buscar/noElaborados/{categoria}/{sucursalId}")
+    public ResponseEntity<List<ArticuloInsumoDto>> findByEsParaElaborarFalse(@PathVariable String categoria, @PathVariable Long sucursalId) {
+        return ResponseEntity.ok().body(facade.findByHabilitadoNoElaboradosPorIdSucursalYCategoria(sucursalId, categoria));
+    }
+
 
 
 }

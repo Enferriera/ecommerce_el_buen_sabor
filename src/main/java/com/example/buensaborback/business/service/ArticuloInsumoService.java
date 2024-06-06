@@ -5,6 +5,7 @@ import com.example.buensaborback.domain.entities.ArticuloInsumo;
 import com.example.buensaborback.domain.entities.ArticuloManufacturado;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,4 +20,6 @@ public interface ArticuloInsumoService extends BaseService<ArticuloInsumo,Long> 
     public Optional<ArticuloInsumo> findByCodigo(String codigo);
 
     public List<ArticuloInsumo> getHabilitadosByCategoriaNoParaElaborar(String categoria);
+
+    List<ArticuloInsumo> findByHabilitadoNoElaboradosPorIdSucursalYCategoria(Long sucursalId, String categoria);
 }

@@ -5,6 +5,7 @@ import com.example.buensaborback.domain.dto.articuloInsumoDto.ArticuloInsumoCrea
 import com.example.buensaborback.domain.dto.articuloInsumoDto.ArticuloInsumoDto;
 import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoCreateDto;
 import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoDto;
+import com.example.buensaborback.domain.entities.ArticuloInsumo;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface ArticuloInsumoFacade extends BaseFacade<ArticuloInsumoDto, Arti
     public ArticuloInsumoDto create(ArticuloInsumoCreateDto articuloInsumoCreateDto);
 
     public List<ArticuloInsumoDto> getHabilitadosByCategoriaNoParaElaborar(String categoria);
+    public List<ArticuloInsumoDto> findByHabilitadoNoElaboradosPorIdSucursalYCategoria(Long sucursalId, String categoria);
+
 }

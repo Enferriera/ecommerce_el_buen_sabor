@@ -84,4 +84,8 @@ public class ArticuloInsumoFacadeImp extends BaseFacadeImp<ArticuloInsumo, Artic
         articuloInsumoService.changeHabilitado(id);
     }
 
+    @Override
+    public List<ArticuloInsumoDto>  findByHabilitadoNoElaboradosPorIdSucursalYCategoria(Long sucursalId, String categoria){
+        return articuloInsumoMapper.toDTOsList(articuloInsumoService.findByHabilitadoNoElaboradosPorIdSucursalYCategoria(sucursalId,categoria));
+    }
 }
