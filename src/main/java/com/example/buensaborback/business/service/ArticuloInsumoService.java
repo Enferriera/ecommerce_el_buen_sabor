@@ -21,5 +21,9 @@ public interface ArticuloInsumoService extends BaseService<ArticuloInsumo,Long> 
 
     public List<ArticuloInsumo> getHabilitadosByCategoriaNoParaElaborar(String categoria);
 
+
     List<ArticuloInsumo> findByHabilitadoNoElaboradosPorIdSucursalYCategoria(Long sucursalId, String categoria);
+
+    public Optional<ArticuloInsumo> getArticuloInsumoById(Long id);
+
 }

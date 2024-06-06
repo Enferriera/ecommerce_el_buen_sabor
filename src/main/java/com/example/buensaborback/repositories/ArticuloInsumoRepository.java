@@ -27,6 +27,7 @@ public interface ArticuloInsumoRepository extends BaseRepository<ArticuloInsumo,
     List<ArticuloInsumo> findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(String categoria);
 
 
+
     @Query("SELECT a FROM Articulo a " +
             "JOIN a.categoria c " +
             "JOIN c.sucursales s " +
@@ -35,4 +36,7 @@ public interface ArticuloInsumoRepository extends BaseRepository<ArticuloInsumo,
             "AND s.id = :sucursalId " +
             "AND c.denominacion = :categoria")
     List<ArticuloInsumo> findByHabilitadoNoElaboradosPorIdSucursalYCategoria(@Param("sucursalId") Long sucursalId, @Param("categoria")String categoria);
+
+    Optional<ArticuloInsumo> findById(Long id);
+
 }

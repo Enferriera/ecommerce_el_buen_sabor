@@ -28,4 +28,9 @@ public class ArticuloManufacturadoController {
         return ResponseEntity.ok().body(facade.findHabilitadosBySucursalAndCategoria(sucursalId,categoria));
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity getManufacturadoById(@PathVariable Long id){
+        return ResponseEntity.ok().body(facade.getManufacturadoById(id));
+    }
+
 }

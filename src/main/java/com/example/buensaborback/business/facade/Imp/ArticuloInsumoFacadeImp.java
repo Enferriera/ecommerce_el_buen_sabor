@@ -80,6 +80,11 @@ public class ArticuloInsumoFacadeImp extends BaseFacadeImp<ArticuloInsumo, Artic
     }
 
     @Override
+    public ArticuloInsumoDto getInsumoById(Long id) {
+        return articuloInsumoMapper.toDTO(articuloInsumoService.getById(id));
+    }
+
+    @Override
     public void changeHabilitado(Long id) {
         articuloInsumoService.changeHabilitado(id);
     }

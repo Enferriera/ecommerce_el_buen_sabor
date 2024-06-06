@@ -35,10 +35,16 @@ public class CategoriaController  {
         return ResponseEntity.ok(facade.getCategoriaManufacturados());
     }
 
+
     @GetMapping("/buscar/ecommerce/{sucursalId}")
     public ResponseEntity<List<CategoriaGetDto>> findBySucursalId(@PathVariable Long sucursalId) {
         //logger.info("INICIO GET ALL categorias de insumos");
         return ResponseEntity.ok(facade.findCategoriasBySucursalAndArticuloType(sucursalId));
+
+    @GetMapping("{id}")
+    public ResponseEntity getCategodiaById(@PathVariable Long id){
+        return ResponseEntity.ok().body(facade.getCategoriaById(id));
+
     }
 
 

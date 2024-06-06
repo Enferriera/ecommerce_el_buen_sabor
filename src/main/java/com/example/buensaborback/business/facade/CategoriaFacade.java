@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategoriaFacade extends BaseFacade<CategoriaGetDto, CategoriaGetDto,  Long> {
     public List<CategoriaGetDto> getCategoriaInsumos ();
@@ -17,5 +18,10 @@ public interface CategoriaFacade extends BaseFacade<CategoriaGetDto, CategoriaGe
     public void deleteInSucursales (Long id, SucursalShortDto shortSucursal);
 
     public CategoriaGetDto createNew(CategoriaPostDto categoriaDto);
+
     List<CategoriaGetDto> findCategoriasBySucursalAndArticuloType(Long sucursalId);
+
+
+    public CategoriaGetDto getCategoriaById(Long id);
+
 }

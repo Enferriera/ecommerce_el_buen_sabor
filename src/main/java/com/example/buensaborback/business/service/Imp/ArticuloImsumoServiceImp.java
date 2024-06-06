@@ -153,8 +153,15 @@ public class ArticuloImsumoServiceImp extends BaseServiceImp<ArticuloInsumo,Long
     }
 
     @Override
+
     @Transactional
     public  List<ArticuloInsumo> findByHabilitadoNoElaboradosPorIdSucursalYCategoria(Long sucursalId, String categoria){
         return articuloInsumoRepository.findByHabilitadoNoElaboradosPorIdSucursalYCategoria(sucursalId,categoria);
     }
+
+    public Optional<ArticuloInsumo> getArticuloInsumoById(Long id) {
+        return articuloInsumoRepository.findById(id);
+    }
+
+
 }
