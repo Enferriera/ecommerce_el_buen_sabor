@@ -4,7 +4,7 @@ import com.example.buensaborback.business.facade.Base.BaseFacadeImp;
 import com.example.buensaborback.business.facade.EmpleadoFacade;
 import com.example.buensaborback.business.mapper.BaseMapper;
 import com.example.buensaborback.business.service.Base.BaseService;
-import com.example.buensaborback.domain.dto.EmpleadoDto;
+import com.example.buensaborback.domain.dto.empleadoDto.EmpleadoDto;
 import com.example.buensaborback.domain.entities.Empleado;
 import org.springframework.stereotype.Service;
 

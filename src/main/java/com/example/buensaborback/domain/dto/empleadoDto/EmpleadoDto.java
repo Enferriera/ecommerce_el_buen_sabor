@@ -1,11 +1,8 @@
-package com.example.buensaborback.domain.dto;
+package com.example.buensaborback.domain.dto.empleadoDto;
 
+import com.example.buensaborback.domain.dto.personaDto.PersonaDto;
 import com.example.buensaborback.domain.dto.SucursalDtos.SucursalDto;
 import com.example.buensaborback.domain.dto.pedidoDto.PedidoDto;
-import com.example.buensaborback.domain.entities.Pedido;
-import com.example.buensaborback.domain.entities.Sucursal;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.util.HashSet;

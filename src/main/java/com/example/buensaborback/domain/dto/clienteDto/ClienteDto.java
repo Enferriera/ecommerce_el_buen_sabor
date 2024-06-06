@@ -1,5 +1,7 @@
-package com.example.buensaborback.domain.dto;
+package com.example.buensaborback.domain.dto.clienteDto;
 
+import com.example.buensaborback.domain.dto.DomicilioDto;
+import com.example.buensaborback.domain.dto.personaDto.PersonaDto;
 import com.example.buensaborback.domain.dto.pedidoDto.PedidoDto;
 import lombok.*;
 
