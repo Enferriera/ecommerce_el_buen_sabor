@@ -41,7 +41,7 @@ public class CategoriaController  {
         //logger.info("INICIO GET ALL categorias de insumos");
         return ResponseEntity.ok(facade.findCategoriasBySucursalAndArticuloType(sucursalId));
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CategoriaGetDto> getCategodiaById(@PathVariable Long id){
         return ResponseEntity.ok().body(facade.getCategoriaById(id));
 

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/articulosManufacturados")
@@ -28,8 +29,8 @@ public class ArticuloManufacturadoController {
         return ResponseEntity.ok().body(facade.findHabilitadosBySucursalAndCategoria(sucursalId,categoria));
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity getManufacturadoById(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<ArticuloManufacturadoDto>> getManufacturadoById(@PathVariable Long id){
         return ResponseEntity.ok().body(facade.getManufacturadoById(id));
     }
 
