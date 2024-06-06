@@ -133,5 +133,16 @@ public class ArticuloManufacturadoServiceImp extends BaseServiceImp<ArticuloManu
         return articuloManufacturadoRepository.findByHabilitadoTrueAndCategoriaDenominacion(categoria);
     }
 
+    @Override
+    @Transactional
+    public List<ArticuloManufacturado> findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(String categoria) {
+        return articuloManufacturadoRepository.findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(categoria);
+    }
 
+    @Override
+    @Transactional
+
+   public List<ArticuloManufacturado> findHabilitadosBySucursal( Long sucursalId){
+        return articuloManufacturadoRepository.findHabilitadosBySucursal(sucursalId);
+    }
 }

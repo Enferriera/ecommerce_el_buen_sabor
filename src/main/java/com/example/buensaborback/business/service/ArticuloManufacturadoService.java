@@ -18,4 +18,8 @@ public interface ArticuloManufacturadoService extends BaseService<ArticuloManufa
 
     public List<ArticuloManufacturado> getHabilitadoByCategoria(String categoria);
 
+    List<ArticuloManufacturado> findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(String categoria);
+
+
+    List<ArticuloManufacturado> findHabilitadosBySucursal( Long sucursalId);
 }

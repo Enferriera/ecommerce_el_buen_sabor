@@ -18,13 +18,14 @@ public class ArticuloManufacturadoController {
 
     @Autowired
     private ArticuloManufacturadoFacadeImp facade;
-    @GetMapping("/getHabilitados")
-    public ResponseEntity<?> getHabilitados(){
-        return ResponseEntity.ok().body(facade.getHabilitados());
+    @GetMapping("/getHabilitados/{sucursalId}")
+    public ResponseEntity<?> getHabilitados(@PathVariable Long sucursalId) {
+        return ResponseEntity.ok().body(facade.findHabilitadosBySucursal(sucursalId));
     }
 
     @GetMapping("/getHabilitados/{categoria}")
     public ResponseEntity<?> getHabilitados(@PathVariable String categoria){
-        return ResponseEntity.ok().body(facade.getHabilitadosByCategoria(categoria));
+        return ResponseEntity.ok().body(facade.findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(categoria));
     }
+
 }

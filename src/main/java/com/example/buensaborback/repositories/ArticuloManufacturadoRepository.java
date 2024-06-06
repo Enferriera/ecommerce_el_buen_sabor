@@ -3,6 +3,7 @@ package com.example.buensaborback.repositories;
 import com.example.buensaborback.domain.entities.ArticuloInsumo;
 import com.example.buensaborback.domain.entities.ArticuloManufacturado;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,14 +25,15 @@ public interface ArticuloManufacturadoRepository extends BaseRepository<Articulo
     List<ArticuloManufacturado> getArticulosByCategoria(Long id);
 
 
-    @Query(value = "SELECT *\n" +
-            "FROM ARTICULO_MANUFACTURADO am\n" +
-            "JOIN ARTICULO a ON am.ID = a.ID\n" +
-            "WHERE a.HABILITADO = TRUE", nativeQuery = true)
-    List<ArticuloManufacturado> getHabilitados();
+    @Query("SELECT a FROM ArticuloManufacturado a " +
+            "JOIN a.categoria c " +
+            "JOIN c.sucursales s " +
+            "WHERE a.habilitado = true AND s.id = :sucursalId")
+    List<ArticuloManufacturado> findHabilitadosBySucursal(@Param("sucursalId") Long sucursalId);
   
     Optional<ArticuloManufacturado> findByCodigo(String codigo);
 
     List<ArticuloManufacturado> findByHabilitadoTrueAndCategoriaDenominacion(String categoria);
 
+    List<ArticuloManufacturado> findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(String categoria);
 }
