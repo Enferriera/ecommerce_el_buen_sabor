@@ -2,6 +2,7 @@ package com.example.buensaborback.business.service;
 
 import com.example.buensaborback.business.service.Base.BaseService;
 import com.example.buensaborback.domain.entities.ArticuloManufacturado;
+import org.springframework.data.repository.query.Param;
 
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface ArticuloManufacturadoService extends BaseService<ArticuloManufa
 
 
     List<ArticuloManufacturado> findHabilitadosBySucursal( Long sucursalId);
+
+    List<ArticuloManufacturado> findHabilitadosBySucursalAndCategoria(Long sucursalId,  String categoriaNombre);
+
 }

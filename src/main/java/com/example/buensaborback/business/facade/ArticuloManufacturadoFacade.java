@@ -4,6 +4,7 @@ import com.example.buensaborback.business.facade.Base.BaseFacade;
 import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoCreateDto;
 import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoDto;
 import com.example.buensaborback.domain.entities.ArticuloManufacturado;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -18,5 +19,7 @@ public ArticuloManufacturadoDto create(ArticuloManufacturadoCreateDto articuloMa
 
 
     List<ArticuloManufacturadoDto> findHabilitadosBySucursal( Long sucursalId);
+
+    List<ArticuloManufacturadoDto> findHabilitadosBySucursalAndCategoria( Long sucursalId,  String categoriaNombre);
 
 }

@@ -66,4 +66,9 @@ public class ArticuloManufacturadoFacadeImp extends BaseFacadeImp<ArticuloManufa
     public List<ArticuloManufacturadoDto> findHabilitadosBySucursal(Long sucursalId) {
         return articuloManufacturadoMapper.toDTOsList(articuloManufacturadoService.findHabilitadosBySucursal(sucursalId));
     }
+
+    @Override
+    public List<ArticuloManufacturadoDto> findHabilitadosBySucursalAndCategoria(Long sucursalId, String categoriaNombre) {
+        return articuloManufacturadoMapper.toDTOsList(articuloManufacturadoService.findHabilitadosBySucursalAndCategoria(sucursalId, categoriaNombre));
+    }
 }

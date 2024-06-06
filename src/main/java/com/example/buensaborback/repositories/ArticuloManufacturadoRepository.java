@@ -36,4 +36,12 @@ public interface ArticuloManufacturadoRepository extends BaseRepository<Articulo
     List<ArticuloManufacturado> findByHabilitadoTrueAndCategoriaDenominacion(String categoria);
 
     List<ArticuloManufacturado> findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(String categoria);
+
+    @Query("SELECT a FROM ArticuloManufacturado a " +
+
+            "JOIN a.categoria c " +
+            "JOIN c.sucursales s " +
+            "WHERE a.habilitado = true AND s.id = :sucursalId AND c.denominacion = :categoriaNombre")
+    List<ArticuloManufacturado> findHabilitadosBySucursalAndCategoria(@Param("sucursalId") Long sucursalId, @Param("categoriaNombre") String categoriaNombre);
+
 }
