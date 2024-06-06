@@ -75,6 +75,11 @@ public class ArticuloInsumoFacadeImp extends BaseFacadeImp<ArticuloInsumo, Artic
     }
 
     @Override
+    public List<ArticuloInsumoDto> getHabilitadosByCategoriaNoParaElaborar(String categoria) {
+        return articuloInsumoMapper.toDTOsList(articuloInsumoService.getHabilitadosByCategoriaNoParaElaborar(categoria));
+    }
+
+    @Override
     public void changeHabilitado(Long id) {
         articuloInsumoService.changeHabilitado(id);
     }

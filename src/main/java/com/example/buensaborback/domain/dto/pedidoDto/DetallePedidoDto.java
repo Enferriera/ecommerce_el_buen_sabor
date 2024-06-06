@@ -3,6 +3,7 @@ package com.example.buensaborback.domain.dto.pedidoDto;
 import com.example.buensaborback.domain.dto.BaseDto;
 import com.example.buensaborback.domain.dto.DomicilioDto;
 import com.example.buensaborback.domain.dto.articuloDto.ArticuloDto;
+import com.example.buensaborback.domain.dto.articuloDto.ArticuloShortDto;
 import com.example.buensaborback.domain.entities.Articulo;
 import com.example.buensaborback.domain.entities.Domicilio;
 import com.example.buensaborback.domain.enums.FormaPago;
@@ -13,8 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -22,7 +22,7 @@ import java.util.Set;
 public class DetallePedidoDto extends BaseDto {
     private Integer cantidad;
     private Double subTotal;
-    private ArticuloDto articulo;
+    private ArticuloShortDto articulo;
 
 
 

@@ -11,4 +11,6 @@ public ArticuloManufacturadoDto create(ArticuloManufacturadoCreateDto articuloMa
     public void changeHabilitado(Long id);
 
     public List<ArticuloManufacturadoDto> getHabilitados();
+
+    public List<ArticuloManufacturadoDto> getHabilitadosByCategoria(String categoria);
 }

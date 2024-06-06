@@ -2,10 +2,7 @@ package com.example.buensaborback.business.service.Imp;
 
 import com.example.buensaborback.business.service.ArticuloInsumoService;
 import com.example.buensaborback.business.service.Base.BaseServiceImp;
-import com.example.buensaborback.domain.entities.ArticuloInsumo;
-import com.example.buensaborback.domain.entities.ArticuloManufacturadoDetalle;
-import com.example.buensaborback.domain.entities.Categoria;
-import com.example.buensaborback.domain.entities.ImagenArticulo;
+import com.example.buensaborback.domain.entities.*;
 import com.example.buensaborback.repositories.ArticuloInsumoRepository;
 import com.example.buensaborback.repositories.ArticuloManufacturadoDetalleRepository;
 import com.example.buensaborback.repositories.CategoriaRepository;
@@ -148,6 +145,11 @@ public class ArticuloImsumoServiceImp extends BaseServiceImp<ArticuloInsumo,Long
     @Override
     public Optional<ArticuloInsumo> findByCodigo(String codigo) {
         return articuloInsumoRepository.findByCodigo(codigo);
+    }
+
+    @Override
+    public List<ArticuloInsumo> getHabilitadosByCategoriaNoParaElaborar(String categoria) {
+        return articuloInsumoRepository.findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(categoria);
     }
 
 }

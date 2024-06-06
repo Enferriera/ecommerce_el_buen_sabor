@@ -2,8 +2,9 @@ package com.example.buensaborback.domain.dto.pedidoDto;
 
 import com.example.buensaborback.domain.dto.BaseDto;
 import com.example.buensaborback.domain.dto.DomicilioDto;
-import com.example.buensaborback.domain.dto.EmpleadoDto;
-import com.example.buensaborback.domain.dto.SucursalDtos.SucursalDto;
+import com.example.buensaborback.domain.dto.empleadoDto.EmpleadoDto;
+import com.example.buensaborback.domain.dto.SucursalDtos.SucursalShortDto;
+import com.example.buensaborback.domain.dto.personaDto.PersonaShortDto;
 import com.example.buensaborback.domain.entities.*;
 import com.example.buensaborback.domain.enums.Estado;
 import com.example.buensaborback.domain.enums.FormaPago;
@@ -27,7 +28,7 @@ public class PedidoDto extends BaseDto {
 
     private LocalTime horaEstimadaFinalizacion;
     private Double total;
-   // private Double totalCosto;
+
     private Estado estado;
     private TipoEnvio tipoEnvio;
     private FormaPago formaPago;
@@ -35,13 +36,13 @@ public class PedidoDto extends BaseDto {
 
     private DomicilioDto domicilio;
 
-    private SucursalDto sucursal;
+    private SucursalShortDto sucursal;
 
     private Factura factura;
 
-    private Cliente cliente;
+    private PersonaShortDto cliente;
 
     private Set<DetallePedidoDto> detallePedidos = new HashSet<>();
 
-    private EmpleadoDto empleado;
+    private PersonaShortDto empleado;
 }

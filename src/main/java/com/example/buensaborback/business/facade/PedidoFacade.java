@@ -5,4 +5,5 @@ import com.example.buensaborback.domain.dto.pedidoDto.PedidoCreateDto;
 import com.example.buensaborback.domain.dto.pedidoDto.PedidoDto;
 
 public interface PedidoFacade extends BaseFacade <PedidoDto, PedidoDto, Long> {
+    public PedidoDto create(PedidoCreateDto pedidoDto);
 }

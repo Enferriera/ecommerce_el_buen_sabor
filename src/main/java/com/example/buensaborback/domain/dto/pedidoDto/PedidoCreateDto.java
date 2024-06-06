@@ -24,5 +24,5 @@ public class PedidoCreateDto extends BaseDto {
     private DomicilioDto domicilio;
     private Long idSucursal;
     private Long idCliente;
-    private Set<DetallePedidoCreateDto> detallesPedidos= new HashSet<>();
+    private Set<DetallePedidoCreateDto> detallePedidos= new HashSet<>();
 }

@@ -16,4 +16,6 @@ public interface ArticuloManufacturadoService extends BaseService<ArticuloManufa
 
     public Optional<ArticuloManufacturado> findByCodigo(String codigo);
 
+    public List<ArticuloManufacturado> getHabilitadoByCategoria(String categoria);
+
 }

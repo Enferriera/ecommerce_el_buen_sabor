@@ -12,6 +12,7 @@ import com.example.buensaborback.domain.dto.promocionDto.PromocionCreateDto;
 import com.example.buensaborback.domain.dto.promocionDto.PromocionDto;
 import com.example.buensaborback.domain.entities.Pedido;
 import com.example.buensaborback.domain.entities.Promocion;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class PedidoFacadeImpl extends BaseFacadeImp<Pedido, PedidoDto, PedidoDto
     @Autowired
     private PedidoService pedidoService;
 
-
+@Transactional
     public PedidoDto create(PedidoCreateDto pedidoDto) {;
         System.out.println("antes de convertir "+pedidoDto.getFormaPago());
         Pedido pedido = pedidoMapper.toCreateEntity(pedidoDto);

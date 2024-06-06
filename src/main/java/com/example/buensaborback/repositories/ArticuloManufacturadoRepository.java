@@ -31,4 +31,7 @@ public interface ArticuloManufacturadoRepository extends BaseRepository<Articulo
     List<ArticuloManufacturado> getHabilitados();
   
     Optional<ArticuloManufacturado> findByCodigo(String codigo);
+
+    List<ArticuloManufacturado> findByHabilitadoTrueAndCategoriaDenominacion(String categoria);
+
 }

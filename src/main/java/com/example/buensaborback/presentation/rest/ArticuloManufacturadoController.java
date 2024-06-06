@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/articulosManufacturados")
 @CrossOrigin("*")
@@ -19,5 +21,10 @@ public class ArticuloManufacturadoController {
     @GetMapping("/getHabilitados")
     public ResponseEntity<?> getHabilitados(){
         return ResponseEntity.ok().body(facade.getHabilitados());
+    }
+
+    @GetMapping("/getHabilitados/{categoria}")
+    public ResponseEntity<?> getHabilitados(@PathVariable String categoria){
+        return ResponseEntity.ok().body(facade.getHabilitadosByCategoria(categoria));
     }
 }

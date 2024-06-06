@@ -6,7 +6,11 @@ import com.example.buensaborback.domain.dto.articuloInsumoDto.ArticuloInsumoDto;
 import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoCreateDto;
 import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoDto;
 
+import java.util.List;
+
 public interface ArticuloInsumoFacade extends BaseFacade<ArticuloInsumoDto, ArticuloInsumoDto, Long> {
     public void changeHabilitado(Long id);
     public ArticuloInsumoDto create(ArticuloInsumoCreateDto articuloInsumoCreateDto);
+
+    public List<ArticuloInsumoDto> getHabilitadosByCategoriaNoParaElaborar(String categoria);
 }
