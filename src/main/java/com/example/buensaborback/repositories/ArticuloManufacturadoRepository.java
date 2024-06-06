@@ -35,7 +35,6 @@ public interface ArticuloManufacturadoRepository extends BaseRepository<Articulo
 
     List<ArticuloManufacturado> findByHabilitadoTrueAndCategoriaDenominacion(String categoria);
 
-    List<ArticuloManufacturado> findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(String categoria);
 
     @Query("SELECT a FROM ArticuloManufacturado a " +
 

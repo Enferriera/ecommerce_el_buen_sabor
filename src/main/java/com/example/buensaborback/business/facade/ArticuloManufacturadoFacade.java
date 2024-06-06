@@ -15,8 +15,6 @@ public ArticuloManufacturadoDto create(ArticuloManufacturadoCreateDto articuloMa
 
 
     public List<ArticuloManufacturadoDto> getHabilitadosByCategoria(String categoria);
-    List<ArticuloManufacturadoDto> findByHabilitadoTrueAndEsParaElaborarFalseAndCategoriaDenominacion(String categoria);
-
 
     List<ArticuloManufacturadoDto> findHabilitadosBySucursal( Long sucursalId);
 
