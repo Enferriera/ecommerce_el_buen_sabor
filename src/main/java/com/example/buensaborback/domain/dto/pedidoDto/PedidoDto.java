@@ -44,5 +44,5 @@ public class PedidoDto extends BaseDto {
 
     private Set<DetallePedidoDto> detallePedidos = new HashSet<>();
 
-    private EmpleadoDto empleado;
+    private PersonaShortDto empleado;
 }
