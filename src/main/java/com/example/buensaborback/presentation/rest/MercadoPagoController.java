@@ -19,7 +19,7 @@ public class MercadoPagoController {
 
             PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
                     .id(pedido.getId().toString())
-                    .title(pedido.getSucursal().getEmpresa().getNombre())
+                    .title(pedido.getSucursal().getNombre())
                     .currencyId("ARG")
                     .pictureUrl("https://www.mercadopago.com/org-img/MP3/home/logomp3.gif")
                     .description("Compra de comida")
