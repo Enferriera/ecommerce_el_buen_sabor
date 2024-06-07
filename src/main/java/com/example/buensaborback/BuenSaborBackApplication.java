@@ -464,6 +464,7 @@ public class BuenSaborBackApplication {
 			imagenArticuloRepository.save(imagenArticuloHarina);
 			imagenArticuloRepository.save(imagenArticuloQueso);
 			imagenArticuloRepository.save(imagenArticuloTomate);
+			imagenArticuloRepository.save(imagenArticuloCerveza);
 
 			//ASOCIAMOS IMAGEN CON INSUMOS
 			cocaCola.getImagenes().add(imagenArticuloCoca);
@@ -727,7 +728,7 @@ public class BuenSaborBackApplication {
 					.denominacion("Cafe Mediano")
 					.codigo("M011")
 					.eliminado(false)
-					.habilitado(false)
+					.habilitado(true)
 					.precioVenta(1000.0)
 					.descripcion("")
 					.unidadMedida(unidadMedidaPorciones)
@@ -746,11 +747,11 @@ public class BuenSaborBackApplication {
 					.build();
 
 			ImagenArticulo imgCafeSimple = ImagenArticulo.builder()
-					.url("")
+					.url("https://cdn.pixabay.com/photo/2015/05/07/13/46/cappuccino-756490_1280.jpg")
 					.build();
 
 			ImagenArticulo imgMacchiato = ImagenArticulo.builder()
-					.url("")
+					.url("https://cdn.pixabay.com/photo/2014/01/15/09/53/latte-macchiato-245477_1280.jpg")
 					.build();
 
 			cafeSimple.getImagenes().add(imgCafeSimple);
