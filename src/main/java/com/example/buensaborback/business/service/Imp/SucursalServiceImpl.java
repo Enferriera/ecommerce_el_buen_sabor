@@ -29,40 +29,6 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal,Long> implement
    EmpresaRepository empresaRepository;
     private static final Logger logger = LoggerFactory.getLogger(BaseServiceImp.class);
 
-    @Override
-    @Transactional
-    public Sucursal guardarSucursal(Sucursal sucursal) {
-        var domicilio = sucursal.getDomicilio();
-        if(domicilio.getId() != null){
-            var domicilioBd = domicilioRepository.findById(domicilio.getId());
-            domicilioBd.ifPresent(sucursal::setDomicilio);
-        }else{
-            domicilioRepository.save(domicilio);
-            sucursal.setDomicilio(domicilio);
-        }
-        var empresa = empresaRepository.findById(sucursal.getEmpresa().getId());
-        if(empresa.isEmpty()){
-            throw new RuntimeException("Empresa no encontrada");
-        }
-
-        return sucursalRepository.save(sucursal);
-    }
-
-    @Override
-    @Transactional
-    public Sucursal actualizarSucursal(Long id,Sucursal sucursal) {
-        var sucursalActualizar = sucursalRepository.findById(sucursal.getId());
-        if(sucursalActualizar.isEmpty()){
-            throw new RuntimeException("Sucursal no encontrada: { id: " + id + " }");
-        }
-        var domicilio = domicilioRepository.findById(sucursal.getDomicilio().getId());
-        domicilioRepository.save(sucursal.getDomicilio());
-        var empresa = empresaRepository.findById(sucursal.getEmpresa().getId());
-
-        sucursal.setDomicilio(domicilio.get());
-        sucursal.setEmpresa(empresa.get());
-        return sucursalRepository.save(sucursal);
-    }
 
     @Override
     public List<Categoria> findCategoriasBySucursalId(Long sucursalId) {

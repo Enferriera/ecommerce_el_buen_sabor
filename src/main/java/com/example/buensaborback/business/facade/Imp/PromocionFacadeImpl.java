@@ -7,8 +7,6 @@ import com.example.buensaborback.business.mapper.PromocionMapper;
 import com.example.buensaborback.business.service.Base.BaseService;
 import com.example.buensaborback.business.service.Imp.PromocionServiceImpl;
 import com.example.buensaborback.business.service.PromocionService;
-import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoDto;
-import com.example.buensaborback.domain.dto.promocionDto.PromocionCreateDto;
 import com.example.buensaborback.domain.dto.promocionDto.PromocionDto;
 import com.example.buensaborback.domain.entities.Promocion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +27,7 @@ public class PromocionFacadeImpl extends BaseFacadeImp<Promocion,PromocionDto,Pr
         this.promocionServiceImpl = promocionServiceImpl;
     }
 
-public PromocionDto create(PromocionCreateDto promocionDto) {
-        System.out.println("PromocionFacadeImpl: " + promocionDto.getDenominacion());
-    Promocion promocion = promocionMapper.toCreateEntity(promocionDto);
-    System.out.println("PromocionFacadeImpl: " + promocion.getDenominacion());
-    return promocionMapper.toDTO(baseService.create(promocion));
-}
+
 
     @Override
     public void changeHabilitado(Long id) {

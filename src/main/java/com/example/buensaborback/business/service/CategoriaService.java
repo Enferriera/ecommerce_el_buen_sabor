@@ -14,10 +14,8 @@ public interface CategoriaService extends BaseService<Categoria,Long> {
     List<Categoria> findByEsInsumoTrue();
     List<Categoria> findByEsInsumoFalse();
 
-    void deleteInSucursales(Long id, SucursalShortDto sucursal);
 
     List<Categoria> findCategoriasBySucursalAndArticuloType( Long sucursalId);
-
 
     Categoria getCategoriaById(Long id);
 

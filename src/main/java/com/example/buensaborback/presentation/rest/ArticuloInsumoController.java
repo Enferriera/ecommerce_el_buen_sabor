@@ -1,15 +1,8 @@
 package com.example.buensaborback.presentation.rest;
 
 import com.example.buensaborback.business.facade.Imp.ArticuloInsumoFacadeImp;
-import com.example.buensaborback.domain.dto.articuloInsumoDto.ArticuloInsumoCreateDto;
 import com.example.buensaborback.domain.dto.articuloInsumoDto.ArticuloInsumoDto;
-import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoCreateDto;
-import com.example.buensaborback.domain.dto.articulomanufacturadodto.ArticuloManufacturadoDto;
-import com.example.buensaborback.domain.entities.ArticuloInsumo;
-import com.example.buensaborback.presentation.rest.Base.BaseControllerImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

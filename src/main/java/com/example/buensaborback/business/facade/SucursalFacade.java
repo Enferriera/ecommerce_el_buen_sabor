@@ -9,9 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface SucursalFacade extends BaseFacade<SucursalDto, SucursalDto, Long> {
-    SucursalDto createSucursal(SucursalDto dto);
-    SucursalDto updateSucursal(Long id,SucursalDto dto);
-    boolean existsSucursalByEsCasaMatriz(Long id);
+
     List<SucursalDto> findAllByEmpresaId( Long id);
     List<CategoriaGetDto> findCategoriasBySucursalId(Long id);
 }

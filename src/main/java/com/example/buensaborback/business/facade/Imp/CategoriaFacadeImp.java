@@ -63,25 +63,17 @@ public class CategoriaFacadeImp extends BaseFacadeImp<Categoria, CategoriaGetDto
         return dtos;
     }
 
-    @Transactional
-    public void deleteInSucursales (Long id, SucursalShortDto shortSucursal) {
-        categoriaService.deleteInSucursales(id, shortSucursal);
-    }
 
-    @Transactional
-    public CategoriaGetDto createNew(CategoriaPostDto dto) {
-        Categoria categoria = categoriaMapper.toEntityCreate(dto);
-        System.out.println("categoria: " + categoria.getId());
-        return categoriaMapper.toDTO(categoriaService.create(categoria));
-    }
+
 
     @Override
-
     @Transactional
     public List<CategoriaGetDto> findCategoriasBySucursalAndArticuloType( Long sucursalId) {
         return categoriaMapper.toDTOsList(categoriaService.findCategoriasBySucursalAndArticuloType(sucursalId));
     }
 
+    @Override
+    @Transactional
     public CategoriaGetDto getCategoriaById(Long id) {
         return categoriaMapper.toDTO(categoriaService.getCategoriaById(id));
     }

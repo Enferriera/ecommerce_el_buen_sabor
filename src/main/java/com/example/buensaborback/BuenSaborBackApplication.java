@@ -44,6 +44,9 @@ public class BuenSaborBackApplication {
 	private ProvinciaRepository provinciaRepository;
 
 	@Autowired
+	private StockInsumoSucursalRepository stockInsumoSucursalRepository;
+
+	@Autowired
 	private LocalidadRepository localidadRepository;
 
 	@Autowired
@@ -99,7 +102,8 @@ public class BuenSaborBackApplication {
 						   ImagenArticuloRepository imagenArticuloRepository,
 						   PromocionRepository promocionRepository,
 						   PedidoRepository pedidoRepository,
-						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository) {
+						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository,
+						   StockInsumoSucursalRepository stockInsumoSucursalRepository) {
 		return args -> {
 			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
 			// Etapa del dashboard
@@ -420,37 +424,29 @@ public class BuenSaborBackApplication {
 			unidadMedidaRepository.save(unidadMedidaPorciones);
 
 			// Crear Insumos , coca cola , harina , etc
-			ArticuloInsumo cocaCola = ArticuloInsumo.builder().
-					denominacion("Coca cola 500ml").
-					codigo("I101").
-					unidadMedida(unidadMedidaLitros).
-					esParaElaborar(false).
-					stockActual(15).
-					stockMinimo(10).
-					stockMaximo(50).
-					precioCompra(50.0).
-					precioVenta(70.0).
-					habilitado(true).
-					build();
 
 			ArticuloInsumo cerveza = ArticuloInsumo.builder().
 					denominacion("Cerveza").
 					codigo("I102").
 					unidadMedida(unidadMedidaLitros).
 					esParaElaborar(false).
-					stockActual(15).
-					stockMinimo(10).
-					stockMaximo(50).
 					precioCompra(70.0).
 					precioVenta(140.0).
 					habilitado(true).
 					build();
 
-			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").codigo("I001").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(4).stockMinimo(10).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
-			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").codigo("I002").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMinimo(5).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
-			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").codigo("I003").unidadMedida(unidadMedidaCantidad).esParaElaborar(true).stockActual(20).stockMinimo(5).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
-
-			// crear fotos para cada insumo
+			ArticuloInsumo cocaCola = ArticuloInsumo.builder().
+					denominacion("Coca cola").
+					codigo("I101").
+					unidadMedida(unidadMedidaLitros).
+					esParaElaborar(false).
+					precioCompra(50.0).
+					precioVenta(70.0).
+					habilitado(true).
+					build();
+			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").codigo("I001").unidadMedida(unidadMedidaGramos).esParaElaborar(true).precioCompra(40.0).precioVenta(60.5).build();
+			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").codigo("I002").unidadMedida(unidadMedidaGramos).esParaElaborar(true).precioCompra(23.6).precioVenta(66.6).build();
+			ArticuloInsumo tomate = ArticuloInsumo.builder().denominacion("Tomate").codigo("I003").unidadMedida(unidadMedidaCantidad).esParaElaborar(true).precioCompra(23.6).precioVenta(66.6).build();
 			ImagenArticulo imagenArticuloCoca = ImagenArticulo.builder().
 					url("https://m.media-amazon.com/images/I/51v8nyxSOYL._SL1500_.jpg").
 					build();
@@ -468,16 +464,34 @@ public class BuenSaborBackApplication {
 
 			//ASOCIAMOS IMAGEN CON INSUMOS
 			cocaCola.getImagenes().add(imagenArticuloCoca);
-			cerveza.getImagenes().add(imagenArticuloCerveza);
 			harina.getImagenes().add(imagenArticuloHarina);
 			queso.getImagenes().add(imagenArticuloQueso);
 			tomate.getImagenes().add(imagenArticuloTomate);
+			cerveza.getImagenes().add(imagenArticuloCerveza);
+
 			// Grabamos los Articulos
+			StockInsumoSucursal stockCocacolaSuc1=StockInsumoSucursal.builder().
+					stockActual(15).
+					stockMinimo(10).
+					stockMaximo(50).
+					articuloInsumo(cocaCola).sucursal(massa1).build();
+			StockInsumoSucursal stockHarinaSuc1=StockInsumoSucursal.builder().stockActual(4).stockMinimo(10).stockMaximo(40).articuloInsumo(harina).sucursal(massa1).build();
+			StockInsumoSucursal stockQuesoSuc1=StockInsumoSucursal.builder().stockActual(4).stockMinimo(10).stockMaximo(40).articuloInsumo(queso).sucursal(massa1).build();
+			StockInsumoSucursal stockTomateSuc1=StockInsumoSucursal.builder().stockActual(4).stockMinimo(10).stockMaximo(40).articuloInsumo(tomate).sucursal(massa1).build();
+			StockInsumoSucursal stockCervezaSuc1=StockInsumoSucursal.builder().stockActual(30).stockMinimo(10).stockMaximo(70).articuloInsumo(cerveza).sucursal(massa1).build();
+
+			harina.getStocksInsumo().add(stockHarinaSuc1);
+			cocaCola.getStocksInsumo().add(stockCocacolaSuc1);
+			queso.getStocksInsumo().add(stockQuesoSuc1);
+			tomate.getStocksInsumo().add(stockTomateSuc1);
+			cerveza.getStocksInsumo().add(stockCervezaSuc1);
+
 			articuloInsumoRepository.save(cocaCola);
-			articuloInsumoRepository.save(cerveza);
 			articuloInsumoRepository.save(harina);
 			articuloInsumoRepository.save(queso);
 			articuloInsumoRepository.save(tomate);
+			articuloInsumoRepository.save(cerveza);
+
 
 			//ASOCIAMOS CATEGORIA CON INSUMOS
 			categoriaInsumos.getArticulos().add(harina);

@@ -10,6 +10,7 @@ import com.example.buensaborback.business.service.SucursalService;
 import com.example.buensaborback.domain.dto.CategoriaDtos.CategoriaGetDto;
 import com.example.buensaborback.domain.dto.SucursalDtos.SucursalDto;
 import com.example.buensaborback.domain.entities.Sucursal;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,21 +34,7 @@ public class SucursalFacadeImp extends BaseFacadeImp<Sucursal, SucursalDto, Sucu
 
 
     @Override
-    public SucursalDto createSucursal(SucursalDto dto) {
-        var sucursal=baseMapper.toEntity(dto);
-        var sucursalPersistida=sucursalService.guardarSucursal(sucursal);
-        return baseMapper.toDTO(sucursalPersistida);
-    }
-
-    @Override
-    public SucursalDto updateSucursal(Long id, SucursalDto dto) {
-
-        var sucursal=baseMapper.toEntity(dto);
-
-        var sucursalActualizada=sucursalService.actualizarSucursal(id,sucursal);
-        return baseMapper.toDTO(sucursalActualizada);
-    }
-
+    @Transactional
     public List<CategoriaGetDto> findCategoriasBySucursalId(Long id) {
         // Busca una entidad por id
         var entities = sucursalService.findCategoriasBySucursalId(id);
@@ -59,12 +46,9 @@ public class SucursalFacadeImp extends BaseFacadeImp<Sucursal, SucursalDto, Sucu
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public boolean existsSucursalByEsCasaMatriz(Long id){
-        return sucursalService.existsSucursalByEsCasaMatriz(id);
-    }
 
     @Override
+    @Transactional
     public List<SucursalDto> findAllByEmpresaId(Long id) {
         var entities = sucursalService.findAllByEmpresaId(id);
         return entities

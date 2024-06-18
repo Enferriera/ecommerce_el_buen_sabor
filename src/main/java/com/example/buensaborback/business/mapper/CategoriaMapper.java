@@ -17,11 +17,5 @@ public interface CategoriaMapper extends BaseMapper<Categoria, CategoriaGetDto, 
 
 
 
-    @Mappings({
-            @Mapping(source = "idSucursales", target = "sucursales", qualifiedByName = "getById",defaultExpression = "java(new java.util.HashSet<>())"),
-            @Mapping(source = "idCategoriaPadre", target = "categoriaPadre", qualifiedByName = "getById",defaultExpression = "java(null)"),
-    })
-    Categoria toEntityCreate(CategoriaPostDto source);
-
 
 }
