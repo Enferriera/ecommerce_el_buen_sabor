@@ -52,7 +52,25 @@ public PedidoDto create(PedidoCreateDto pedidoDto) {
                 System.out.println("Stock actual después: " + stock.getStockActual());
             });
         }else{
+
             System.out.println("No es insumo");
+            ArticuloManufacturado articuloManufacturado = (ArticuloManufacturado) detalle.getArticulo();
+            articuloManufacturado.getArticuloManufacturadoDetalles().forEach(detalleManufacturado -> {
+                System.out.println("Detalle insumo: " + detalleManufacturado.getArticuloInsumo());
+                System.out.println("Detalle insumo cantidad: " + detalleManufacturado.getCantidad());
+                int cantidadTotalInsumo = detalleManufacturado.getCantidad() * detalle.getCantidad();
+                detalleManufacturado.getArticuloInsumo().getStocksInsumo().forEach(stock -> {
+                    System.out.println("Stock actual antes: " + stock.getStockActual());
+
+                    if ((stock.getStockActual() - cantidadTotalInsumo) < stock.getStockMinimo()) {
+                        throw new IllegalArgumentException("No hay suficiente stock");
+                    }
+
+
+                    stock.setStockActual(stock.getStockActual() - cantidadTotalInsumo);
+                    System.out.println("Stock actual después: " + stock.getStockActual());
+                });
+            });
         }
         System.out.println(detalle.getArticulo());
     }
