@@ -873,6 +873,16 @@ public class BuenSaborBackApplication {
 //			Usuario usuarioEmpleado = Usuario.builder().username("martin").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc43a").rol(Rol.CAJERO).build();
 //			usuarioRepository.save(usuarioEmpleado);
 
+			Usuario usuario = Usuario.builder().email("juan@gmail.com").build();
+			usuario.setClave("eee");
+			usuarioRepository.save(usuario);
+
+			Usuario usuario2 = Usuario.builder().email("pepe@gmail.com").build();
+			usuario2.setClave("asd");
+			usuarioRepository.save(usuario2);
+
+
+
 			Cliente cliente = new Cliente();
 
 			cliente.setImagenPersona(imagenCliente);
