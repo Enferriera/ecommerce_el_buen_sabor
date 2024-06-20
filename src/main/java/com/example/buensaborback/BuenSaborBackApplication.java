@@ -868,10 +868,10 @@ public class BuenSaborBackApplication {
 			imagenPersonaRepository.save(imagenEmpleado);
 			Domicilio domicilioCliente = Domicilio.builder().cp(5519).calle("Cangallo").numero(800).piso(0).nroDpto(1).localidad(localidad1).build();
 			domicilioRepository.save(domicilioCliente);
-			Usuario usuarioCliente = Usuario.builder().username("sebastian").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc4a3").build();
-			usuarioRepository.save(usuarioCliente);
-			Usuario usuarioEmpleado = Usuario.builder().username("martin").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc43a").rol(Rol.CAJERO).build();
-			usuarioRepository.save(usuarioEmpleado);
+//			Usuario usuarioCliente = Usuario.builder().username("sebastian").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc4a3").build();
+//			usuarioRepository.save(usuarioCliente);
+//			Usuario usuarioEmpleado = Usuario.builder().username("martin").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc43a").rol(Rol.CAJERO).build();
+//			usuarioRepository.save(usuarioEmpleado);
 
 			Cliente cliente = new Cliente();
 
@@ -879,7 +879,7 @@ public class BuenSaborBackApplication {
 			//cliente.setEmail("correoFalso@gmail.com");
 			cliente.setNombre("Sebastian");
 			cliente.setApellido("Wilder");
-			cliente.setUsuario(usuarioCliente);
+//			cliente.setUsuario(usuarioCliente);
 			cliente.setTelefono("2615920825");
 			//	cliente.setEstaActivo(true);
 			cliente.getDomicilios().add(domicilioCliente);
@@ -890,7 +890,7 @@ public class BuenSaborBackApplication {
 			//empleado.setEmail("correoFalso@hotmail.com");
 			empleado.setNombre("CorreoFalso");
 			empleado.setApellido("Falsin");
-			empleado.setUsuario(usuarioEmpleado);
+//			empleado.setUsuario(usuarioEmpleado);
 			empleado.setTelefono("2612151170");
 			//	empleado.setEstaActivo(true);
 			empleado.setImagenPersona(imagenEmpleado);

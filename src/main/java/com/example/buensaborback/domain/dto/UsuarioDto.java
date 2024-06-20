@@ -13,8 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @Getter
 public class UsuarioDto extends BaseDto {
-    private String username;
+
     private String email;
-    private String password;
-    private Rol rol;
+    private String claveEncriptada;
 }
