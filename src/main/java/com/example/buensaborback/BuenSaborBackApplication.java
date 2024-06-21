@@ -475,9 +475,9 @@ public class BuenSaborBackApplication {
 					stockMinimo(10).
 					stockMaximo(50).
 					articuloInsumo(cocaCola).sucursal(massa1).build();
-			StockInsumoSucursal stockHarinaSuc1=StockInsumoSucursal.builder().stockActual(4).stockMinimo(10).stockMaximo(40).articuloInsumo(harina).sucursal(massa1).build();
-			StockInsumoSucursal stockQuesoSuc1=StockInsumoSucursal.builder().stockActual(4).stockMinimo(10).stockMaximo(40).articuloInsumo(queso).sucursal(massa1).build();
-			StockInsumoSucursal stockTomateSuc1=StockInsumoSucursal.builder().stockActual(4).stockMinimo(10).stockMaximo(40).articuloInsumo(tomate).sucursal(massa1).build();
+			StockInsumoSucursal stockHarinaSuc1=StockInsumoSucursal.builder().stockActual(1200).stockMinimo(500).stockMaximo(4000).articuloInsumo(harina).sucursal(massa1).build();
+			StockInsumoSucursal stockQuesoSuc1=StockInsumoSucursal.builder().stockActual(3000).stockMinimo(1000).stockMaximo(4000).articuloInsumo(queso).sucursal(massa1).build();
+			StockInsumoSucursal stockTomateSuc1=StockInsumoSucursal.builder().stockActual(16).stockMinimo(10).stockMaximo(40).articuloInsumo(tomate).sucursal(massa1).build();
 			StockInsumoSucursal stockCervezaSuc1=StockInsumoSucursal.builder().stockActual(30).stockMinimo(10).stockMaximo(70).articuloInsumo(cerveza).sucursal(massa1).build();
 
 			harina.getStocksInsumo().add(stockHarinaSuc1);
