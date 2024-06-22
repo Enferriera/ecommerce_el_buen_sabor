@@ -35,7 +35,7 @@ public class BuenSaborBackApplication {
 	@Autowired
 	private PromocionDetalleRepository promocionDetalleRepository;
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioClienteRepository usuarioRepository;
 
 	@Autowired
 	private PaisRepository paisRepository;
@@ -88,7 +88,7 @@ public class BuenSaborBackApplication {
 						   ImagenPersonaRepository imagenPersonaRepository,
 
 						   PromocionDetalleRepository promocionDetalleRepository,
-						   UsuarioRepository usuarioClienteRepository,
+						   UsuarioClienteRepository usuarioClienteRepository,
 						   PaisRepository paisRepository,
 						   ProvinciaRepository provinciaRepository,
 						   LocalidadRepository localidadRepository,
@@ -474,7 +474,7 @@ public class BuenSaborBackApplication {
 					stockActual(15).
 					stockMinimo(10).
 					stockMaximo(50).
-					articuloInsumo(cocaCola).sucursal(massa1).build();
+					articuloInsumo(cocaCola).sucursal(mama1).build();
 			StockInsumoSucursal stockHarinaSuc1=StockInsumoSucursal.builder().stockActual(1200).stockMinimo(500).stockMaximo(4000).articuloInsumo(harina).sucursal(massa1).build();
 			StockInsumoSucursal stockQuesoSuc1=StockInsumoSucursal.builder().stockActual(3000).stockMinimo(1000).stockMaximo(4000).articuloInsumo(queso).sucursal(massa1).build();
 			StockInsumoSucursal stockTomateSuc1=StockInsumoSucursal.builder().stockActual(16).stockMinimo(10).stockMaximo(40).articuloInsumo(tomate).sucursal(massa1).build();
@@ -861,25 +861,25 @@ public class BuenSaborBackApplication {
 
 //			sucursalRepository.guardarSucursalConValidacion(sucursalMarDelPlata);
 
-			//Crea un cliente y un usuario
+			//Crea un cliente y un usuarioCliente
 			ImagenPersona imagenCliente = ImagenPersona.builder().url("https://hips.hearstapps.com/hmg-prod/images/la-la-land-final-1638446140.jpg").build();
 			imagenPersonaRepository.save(imagenCliente);
 			ImagenPersona imagenEmpleado = ImagenPersona.builder().url("https://hips.hearstapps.com/hmg-prod/images/la-la-land-final-1638446140.jpg").build();
 			imagenPersonaRepository.save(imagenEmpleado);
 			Domicilio domicilioCliente = Domicilio.builder().cp(5519).calle("Cangallo").numero(800).piso(0).nroDpto(1).localidad(localidad1).build();
 			domicilioRepository.save(domicilioCliente);
-//			Usuario usuarioCliente = Usuario.builder().username("sebastian").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc4a3").build();
+//			UsuarioCliente usuarioCliente = UsuarioCliente.builder().username("sebastian").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc4a3").build();
 //			usuarioRepository.save(usuarioCliente);
-//			Usuario usuarioEmpleado = Usuario.builder().username("martin").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc43a").rol(Rol.CAJERO).build();
+//			UsuarioCliente usuarioEmpleado = UsuarioCliente.builder().username("martin").auth0Id("9565a49d-ecc1-4f4e-adea-6cdcb7edc43a").rol(Rol.CAJERO).build();
 //			usuarioRepository.save(usuarioEmpleado);
 
-			Usuario usuario = Usuario.builder().email("juan@gmail.com").build();
-			usuario.setClave("eee");
-			usuarioRepository.save(usuario);
+			UsuarioCliente usuarioCliente = UsuarioCliente.builder().email("enferrelariel@hotmail.com").build();
+			usuarioCliente.setClave("eee");
+			usuarioClienteRepository.save(usuarioCliente);
 
-			Usuario usuario2 = Usuario.builder().email("pepe@gmail.com").build();
-			usuario2.setClave("asd");
-			usuarioRepository.save(usuario2);
+			UsuarioCliente usuarioCliente2 = UsuarioCliente.builder().email("pepe@gmail.com").build();
+			usuarioCliente2.setClave("asd");
+			usuarioClienteRepository.save(usuarioCliente2);
 
 
 
@@ -889,10 +889,11 @@ public class BuenSaborBackApplication {
 			//cliente.setEmail("correoFalso@gmail.com");
 			cliente.setNombre("Sebastian");
 			cliente.setApellido("Wilder");
-//			cliente.setUsuario(usuarioCliente);
+//			cliente.setUsuarioCliente(usuarioCliente);
 			cliente.setTelefono("2615920825");
 			//	cliente.setEstaActivo(true);
 			cliente.getDomicilios().add(domicilioCliente);
+			cliente.setUsuarioCliente(usuarioCliente);
 			clienteRepository.save(cliente);
 
 			Empleado empleado = new Empleado();
@@ -900,7 +901,7 @@ public class BuenSaborBackApplication {
 			//empleado.setEmail("correoFalso@hotmail.com");
 			empleado.setNombre("CorreoFalso");
 			empleado.setApellido("Falsin");
-//			empleado.setUsuario(usuarioEmpleado);
+//			empleado.setUsuarioCliente(usuarioEmpleado);
 			empleado.setTelefono("2612151170");
 			//	empleado.setEstaActivo(true);
 			empleado.setImagenPersona(imagenEmpleado);
@@ -915,7 +916,7 @@ public class BuenSaborBackApplication {
 					.horaEstimadaFinalizacion(LocalTime.now())
 					.total(300.0)
 					.totalCosto(170.6)
-					.estado(Estado.PREPARACION)
+					.estadoPedido(EstadoPedido.PREPARACION)
 					.formaPago(FormaPago.MERCADO_PAGO)
 					.tipoEnvio(TipoEnvio.DELIVERY)
 					.sucursal(massa1)
@@ -932,19 +933,19 @@ public class BuenSaborBackApplication {
 			pedidoRepository.save(pedido);
 
 			Random random = new Random();
-			Factura facturaBuilder = Factura.builder().fechaFacturacion(LocalDate.now())
-					.mpPaymentId(random.nextInt(1000))  // Se asume un rango máximo de 1000
-					.mpMerchantOrderId(random.nextInt(1000)) // Se asume un rango máximo de 1000
-					.mpPreferenceId("MP-" + random.nextInt(10000))  // Se asume un rango máximo de 10000
-					.mpPaymentType("Tipo" + random.nextInt(10)) // Se asume un rango máximo de 10
-					.formaPago(FormaPago.EFECTIVO)
-					.totalVenta(random.nextDouble() * 1000).build();
+//			Factura facturaBuilder = Factura.builder().fechaFacturacion(LocalDate.now())
+//					.mpPaymentId(random.nextInt(1000))  // Se asume un rango máximo de 1000
+//					.mpMerchantOrderId(random.nextInt(1000)) // Se asume un rango máximo de 1000
+//					.mpPreferenceId("MP-" + random.nextInt(10000))  // Se asume un rango máximo de 10000
+//					.mpPaymentType("Tipo" + random.nextInt(10)) // Se asume un rango máximo de 10
+//					.formaPago(FormaPago.EFECTIVO)
+//					.totalVenta(random.nextDouble() * 1000).build();
+//
+//			facturaRepository.save(facturaBuilder);
+//
+//			pedido.setFactura(facturaBuilder);
 
-			facturaRepository.save(facturaBuilder);
-
-			pedido.setFactura(facturaBuilder);
-
-			pedidoRepository.save(pedido);
+//			pedidoRepository.save(pedido);
 
 			Categoria categoria = Categoria.builder()
 					.denominacion("Categoria de prueba")

@@ -19,6 +19,9 @@ import java.util.Set;
 @SuperBuilder
 public class Cliente extends Persona {
 
+    @OneToOne
+    private UsuarioCliente usuarioCliente;
+
     @ManyToMany
     @JoinTable(name = "cliente_domicilio",
             joinColumns = @JoinColumn(name = "cliente_id"),

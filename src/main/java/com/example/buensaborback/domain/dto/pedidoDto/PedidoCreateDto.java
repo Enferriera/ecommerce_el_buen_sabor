@@ -19,7 +19,7 @@ import java.util.Set;
 public class PedidoCreateDto extends BaseDto {
     private String formaPago;
     private String tipoEnvio;
-    private String estado;
+    private String estadoPedido;
     private LocalDate fechaPedido=LocalDate.now();
     private DomicilioDto domicilio;
     private Long idSucursal;

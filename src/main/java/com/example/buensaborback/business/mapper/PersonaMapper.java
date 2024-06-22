@@ -5,7 +5,7 @@ import com.example.buensaborback.domain.dto.personaDto.PersonaShortDto;
 import com.example.buensaborback.domain.entities.Persona;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {UsuarioMapper.class})
+@Mapper(componentModel = "spring", uses = {UsuarioClienteMapper.class})
 public interface PersonaMapper extends BaseMapper<Persona, PersonaDto, PersonaDto>{
     PersonaShortDto toShortDto(Persona persona);
 }
