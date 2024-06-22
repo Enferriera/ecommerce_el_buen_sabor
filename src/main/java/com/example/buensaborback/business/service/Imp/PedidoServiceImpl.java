@@ -388,8 +388,12 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
             }
             case PENDIENTE_PAGO ->
                     throw new ServicioException("Estado PENDIENTE_PAGO en pedidos de MERCADO_PAGO no implementado a traves de metodo updateEstado.");
-            case CANCELADO ->
-                    throw new ServicioException("Estado CANCELADO en pedidos de MERCADO_PAGO no implementado a traves de metodo updateEstado.");
+            case CANCELADO ->{
+                this.revertirStock(pedido);
+                pedido.setEstadoPedido(newEstado);
+                pedidoRepository.save(pedido);
+            }
+
             default -> throw new ServicioException("Estado seleccionado invalido.");
         }
 
