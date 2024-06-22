@@ -5,8 +5,21 @@ import com.example.buensaborback.business.service.DomicilioService;
 import com.example.buensaborback.business.service.EmpleadoService;
 import com.example.buensaborback.domain.entities.Domicilio;
 import com.example.buensaborback.domain.entities.Empleado;
+import com.example.buensaborback.domain.enums.Rol;
+import com.example.buensaborback.repositories.EmpleadoRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmpleadoServiceImp extends BaseServiceImp<Empleado,Long> implements EmpleadoService {
+    @Autowired
+    private EmpleadoRepository empleadoRepository;
+
+    @Override
+    @Transactional
+    public int countEmpleadosBySucursalAndRol(Long sucursalId,  Rol rol){
+        return empleadoRepository.countEmpleadosBySucursalAndRol(sucursalId, rol);
+    }
 }
