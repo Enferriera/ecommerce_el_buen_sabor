@@ -5,7 +5,9 @@ import com.example.buensaborback.business.mapper.FacturaMapper;
 import com.example.buensaborback.business.service.Base.BaseServiceImp;
 import com.example.buensaborback.business.service.DetalleFacturaService;
 import com.example.buensaborback.business.service.FacturaService;
+import com.example.buensaborback.domain.dto.DetalleFacturaDto;
 import com.example.buensaborback.domain.dto.FacturaDto;
+import com.example.buensaborback.domain.entities.DetalleFactura;
 import com.example.buensaborback.domain.entities.DetallePedido;
 import com.example.buensaborback.domain.entities.Factura;
 import com.example.buensaborback.domain.entities.Pedido;
@@ -27,10 +29,7 @@ import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class FacturaServiceImpl extends BaseServiceImp<Factura,Long> implements FacturaService {
@@ -137,13 +136,16 @@ public class FacturaServiceImpl extends BaseServiceImp<Factura,Long> implements 
         factura.setTotalVenta(pedido.getTotal());
         factura.setFormaPago(FormaPago.EFECTIVO);
 
-        factura = facturaRepository.save(factura);
+       factura = facturaRepository.save(factura);
 
         List<DetallePedido> detallesPedidos = detallePedidoRepository.findAllByPedidoId(pedido.getId());
-
+        Set<DetalleFactura> detallesFactura= new HashSet<>();
         for(DetallePedido detallePedido : detallesPedidos) {
-            detalleFacturaService.saveDetalleFromPedido(detallePedido, factura);
+            detallesFactura.add(detalleFacturaService.saveDetalleFromPedido(detallePedido));
         }
+        factura.setDetalleFacturas(detallesFactura);
+
+        factura = facturaRepository.save(factura);
 
         return factura;
     }

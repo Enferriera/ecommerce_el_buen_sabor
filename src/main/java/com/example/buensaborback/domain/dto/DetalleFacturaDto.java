@@ -1,6 +1,7 @@
 package com.example.buensaborback.domain.dto;
 
 import com.example.buensaborback.domain.dto.articuloDto.ArticuloDto;
+import com.example.buensaborback.domain.dto.articuloDto.ArticuloShortDto;
 import com.example.buensaborback.domain.entities.Articulo;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,5 +19,5 @@ public class DetalleFacturaDto extends BaseDto {
 
     private Double subtotal;
 
-    private ArticuloDto articulo;
+    private ArticuloShortDto articulo;
 }

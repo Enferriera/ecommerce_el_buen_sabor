@@ -16,14 +16,14 @@ public class DetalleFacturaServiceImpl extends BaseServiceImp<DetalleFactura,Lon
     @Autowired
     private DetalleFacturaRepository detalleFacturaRepository;
 
-    public void saveDetalleFromPedido(DetallePedido detallePedido, Factura factura) throws ServicioException {
+    public DetalleFactura saveDetalleFromPedido(DetallePedido detallePedido) throws ServicioException {
         DetalleFactura detalleFactura = new DetalleFactura();
 
 
         detalleFactura.setCantidad(detallePedido.getCantidad());
         detalleFactura.setSubtotal(detallePedido.getSubTotal());
         detalleFactura.setArticulo(detallePedido.getArticulo());
-
-        detalleFacturaRepository.save(detalleFactura);
+        return detalleFactura;
+        //detalleFacturaRepository.save(detalleFactura);
     }
 }
