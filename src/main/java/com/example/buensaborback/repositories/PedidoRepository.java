@@ -14,6 +14,6 @@ public interface PedidoRepository extends BaseRepository<Pedido,Long>{
     @Query("SELECT p FROM Pedido p WHERE p.estadoPedido =:estado AND p.sucursal.id =:idSucursal")
     List<Pedido> findByEstadoPedidoAndSucursalId(@Param("estado")EstadoPedido estado, @Param("idSucursal")Long idSucursal);
 
-    @Query("SELECT p FROM Pedido p WHERE p.cliente.usuarioCliente.id =:userId AND p.cliente.usuarioCliente.email=:email")
+    @Query("SELECT p FROM Pedido p WHERE p.cliente.usuarioCliente.id =:userId AND p.cliente.usuarioCliente.email=:email AND (p.estadoPedido='COMPLETADO' OR p.estadoPedido='NOTA_CREDITO') ORDER BY p.fechaPedido DESC")
     List<Pedido> findAllByUserId(@Param("userId")Long userId, @Param("email") String email);
 }
