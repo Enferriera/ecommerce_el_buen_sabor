@@ -17,8 +17,13 @@ public class DomicilioController extends BaseControllerImp<Domicilio, DomicilioD
         super(facade);
     }
 
-    @GetMapping("/allPorUsuario/{id}")
-    public ResponseEntity<List<DomicilioDto>> getAllPorUsuario(@PathVariable Long id) {
-        return ResponseEntity.ok().body(facade.findAllByClienteId(id));
+    @GetMapping("/allPorUsuario/{idCliente}")
+    public ResponseEntity<List<DomicilioDto>> getAllPorUsuario(@PathVariable Long idCliente) {
+        return ResponseEntity.ok().body(facade.findAllByClienteId(idCliente));
+    }
+
+    @GetMapping("/domicilioSucursal/{idSucursal}")
+    public ResponseEntity<DomicilioDto> getDomicilioSucursal(@PathVariable Long idSucursal){
+        return ResponseEntity.ok().body(facade.findDomicilioBySucursalId(idSucursal));
     }
 }

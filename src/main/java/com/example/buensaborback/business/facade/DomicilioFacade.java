@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DomicilioFacade extends BaseFacade<DomicilioDto, DomicilioDto, Long> {
     public List<DomicilioDto> findAllByClienteId(Long personaId);
-
+public DomicilioDto findDomicilioBySucursalId(Long idSucursal);
 }
