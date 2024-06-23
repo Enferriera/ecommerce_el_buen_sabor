@@ -28,4 +28,9 @@ private DomicilioMapper domicilioMapper;
     public List<DomicilioDto> findAllByClienteId(Long personaId) {
         return domicilioMapper.toDTOsList(domicilioService.findAllByClienteId(personaId));
     }
+
+    @Override
+    public DomicilioDto findDomicilioBySucursalId(Long idSucursal){
+        return domicilioMapper.toDTO(domicilioService.findDomicilioBySucursalId(idSucursal));
+    }
 }

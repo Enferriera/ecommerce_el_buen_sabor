@@ -11,4 +11,7 @@ import java.util.List;
 public interface DomicilioRepository extends BaseRepository<Domicilio,Long>{
     @Query("SELECT d FROM Domicilio d JOIN d.clientes c WHERE c.id = :clienteId")
     List<Domicilio> findAllByClienteId(@Param("clienteId") Long clienteId);
+
+    @Query("SELECT s.domicilio FROM Sucursal s WHERE s.id = :idSucursal")
+    Domicilio findDomicilioBySucursalId(@Param("idSucursal") Long idSucursal);
 }
