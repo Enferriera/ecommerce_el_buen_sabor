@@ -2,8 +2,7 @@ package com.example.buensaborback.presentation.rest;
 
 import com.example.buensaborback.business.facade.Imp.UsuarioClienteFacadeImpl;
 import com.example.buensaborback.business.facade.UsuarioClienteFacade;
-import com.example.buensaborback.domain.dto.UsuarioClienteDto;
-import com.example.buensaborback.domain.dto.UsuarioDto;
+import com.example.buensaborback.domain.dto.usuarioClienteDto.UsuarioClienteDto;
 import com.example.buensaborback.domain.entities.UsuarioCliente;
 import com.example.buensaborback.presentation.rest.Base.BaseControllerImp;
 import org.springframework.beans.factory.annotation.Autowired;
