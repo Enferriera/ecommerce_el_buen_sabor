@@ -35,7 +35,9 @@ public class PromocionFacadeImpl extends BaseFacadeImp<Promocion,PromocionDto,Pr
     }
 
     @Override
-    public List<PromocionDto> getHabilitados() {
-        return promocionMapper.toDTOsList(promocionService.getHabilitados());
+    public List<PromocionDto> findHabilitadasBySucursalId(Long sucursalId){
+        return promocionMapper.toDTOsList(promocionService.findHabilitadasBySucursalId(sucursalId));
     }
+
+
 }

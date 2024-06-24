@@ -801,6 +801,15 @@ public class BuenSaborBackApplication {
 			promocionDiaEnamorados.getPromocionDetalles().add(detallePromo1);
 			promocionDiaEnamorados.getPromocionDetalles().add(detallePromo2);
 
+			promocionDiaEnamorados.getSucursales().add(mama1);
+			promocionDiaEnamorados.getSucursales().add(mama2);
+			promocionDiaEnamorados.getSucursales().add(mansa1);
+			promocionDiaEnamorados.getSucursales().add(mansa2);
+			mama1.getPromociones().add(promocionDiaEnamorados);
+			mama2.getPromociones().add(promocionDiaEnamorados);
+			//sucursalRepository.save(mama1);
+			//sucursalRepository.save(mansa1);
+
 			promocionRepository.save(promocionDiaEnamorados);
 
 			Promocion pizzaConCoca = Promocion.builder().denominacion("Piza + coca")
@@ -836,8 +845,13 @@ public class BuenSaborBackApplication {
 			Promocion promocionId2 = promocionRepository.findAllWithSucursales(2L);
 			sucursalId1.getPromociones().add(promocionId1);
 			sucursalId1.getPromociones().add(promocionId2);
+			sucursalId2.getPromociones().add(promocionId1);
+			sucursalId2.getPromociones().add(promocionId2);
+
 			promocionId1.getSucursales().add(sucursalId1);
+			promocionId2.getSucursales().add(sucursalId1);
 			promocionId1.getSucursales().add(sucursalId2);
+			promocionId2.getSucursales().add(sucursalId2);
 			sucursalRepository.save(sucursalId1);
 			sucursalRepository.save(sucursalId2);
 			promocionRepository.save(promocionId1);

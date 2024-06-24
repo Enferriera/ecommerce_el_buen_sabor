@@ -18,8 +18,10 @@ public class PromocionController {
 
 
 
-    @GetMapping("/getHabilitados")
-    public ResponseEntity<?> getHabilitados(){
-        return ResponseEntity.ok().body(promocionFacade.getHabilitados());
+    @GetMapping("/getHabilitadosPorSucursal/{idSucursal}")
+    public ResponseEntity<?> getHabilitadosPorSucursal(@PathVariable Long idSucursal) {
+        return ResponseEntity.ok().body(promocionFacade.findHabilitadasBySucursalId(idSucursal));
     }
+
+
 }
