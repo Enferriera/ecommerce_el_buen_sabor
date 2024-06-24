@@ -6,6 +6,7 @@ import com.example.buensaborback.business.mapper.BaseMapper;
 import com.example.buensaborback.business.mapper.ClienteMapper;
 import com.example.buensaborback.business.service.Base.BaseService;
 import com.example.buensaborback.business.service.ClienteService;
+import com.example.buensaborback.domain.dto.clienteDto.ClienteCreateDto;
 import com.example.buensaborback.domain.dto.clienteDto.ClienteDto;
 import com.example.buensaborback.domain.dto.clienteDto.ClienteShortDto;
 import com.example.buensaborback.domain.entities.Cliente;
@@ -25,5 +26,11 @@ public class ClienteFacadeImpl extends BaseFacadeImp<Cliente, ClienteDto,Cliente
     @Override
     public ClienteShortDto obtenerClientePorUsuarioClienteId(Long id){
         return clienteMapper.toShortDto(clienteService.findClienteByUsuarioClienteId(id));
+    }
+
+    @Override
+    public ClienteDto createCliente(ClienteCreateDto clienteCreate){
+        return clienteMapper.toDTO(clienteService.createCliente(clienteMapper.toCreateEntity(clienteCreate)));
+
     }
 }

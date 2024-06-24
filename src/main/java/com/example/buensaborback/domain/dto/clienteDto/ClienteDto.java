@@ -3,6 +3,7 @@ package com.example.buensaborback.domain.dto.clienteDto;
 import com.example.buensaborback.domain.dto.DomicilioDto;
 import com.example.buensaborback.domain.dto.personaDto.PersonaDto;
 import com.example.buensaborback.domain.dto.pedidoDto.PedidoDto;
+import com.example.buensaborback.domain.dto.usuarioClienteDto.UsuarioClienteDto;
 import com.example.buensaborback.domain.dto.usuarioClienteDto.UsuarioClienteShortDto;
 import lombok.*;
 
@@ -18,5 +19,5 @@ public class ClienteDto extends PersonaDto {
 
     private Set<PedidoDto> pedidos = new HashSet<>();
 
-    private UsuarioClienteShortDto usuarioCliente;
+    private UsuarioClienteDto usuarioCliente;
 }

@@ -1,6 +1,7 @@
 package com.example.buensaborback.presentation.rest;
 
 import com.example.buensaborback.business.facade.Imp.ClienteFacadeImpl;
+import com.example.buensaborback.domain.dto.clienteDto.ClienteCreateDto;
 import com.example.buensaborback.domain.dto.clienteDto.ClienteDto;
 import com.example.buensaborback.domain.dto.clienteDto.ClienteShortDto;
 import com.example.buensaborback.domain.entities.Cliente;
@@ -19,5 +20,10 @@ public class ClienteController extends BaseControllerImp<Cliente,ClienteDto, Cli
     @GetMapping("/getClientePorUserId/{userId}")
     public ResponseEntity<ClienteShortDto> getClienteByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok().body(facade.obtenerClientePorUsuarioClienteId(userId));
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<ClienteDto> create(@RequestBody ClienteCreateDto dto) {
+        return ResponseEntity.ok().body(facade.createCliente(dto));
     }
 }

@@ -19,7 +19,7 @@ import java.util.Set;
 @SuperBuilder
 public class Cliente extends Persona {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private UsuarioCliente usuarioCliente;
 
     @ManyToMany
