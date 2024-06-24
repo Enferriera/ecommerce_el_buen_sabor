@@ -1,6 +1,6 @@
 package com.example.buensaborback.domain.dto.clienteDto;
 
-import com.example.buensaborback.domain.dto.DomicilioDto;
+import com.example.buensaborback.domain.dto.domicilioDto.DomicilioDto;
 import com.example.buensaborback.domain.dto.personaDto.PersonaShortDto;
 import com.example.buensaborback.domain.dto.usuarioClienteDto.UsuarioClienteShortDto;
 import lombok.AllArgsConstructor;

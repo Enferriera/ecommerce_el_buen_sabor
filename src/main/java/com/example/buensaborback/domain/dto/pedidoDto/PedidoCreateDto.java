@@ -1,9 +1,7 @@
 package com.example.buensaborback.domain.dto.pedidoDto;
 
 import com.example.buensaborback.domain.dto.BaseDto;
-import com.example.buensaborback.domain.dto.DomicilioDto;
-import com.example.buensaborback.domain.enums.FormaPago;
-import com.example.buensaborback.domain.enums.TipoEnvio;
+import com.example.buensaborback.domain.dto.domicilioDto.DomicilioDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

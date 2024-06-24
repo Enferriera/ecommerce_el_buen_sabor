@@ -1,7 +1,7 @@
 package com.example.buensaborback.domain.dto.SucursalDtos;
 
 import com.example.buensaborback.domain.dto.BaseDto;
-import com.example.buensaborback.domain.dto.DomicilioDto;
+import com.example.buensaborback.domain.dto.domicilioDto.DomicilioDto;
 import com.example.buensaborback.domain.dto.EmpresaDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
