@@ -947,9 +947,9 @@ public class BuenSaborBackApplication {
                     .horaEstimadaFinalizacion(LocalTime.now())
                     .total(300.0)
                     .totalCosto(170.6)
-                    .estadoPedido(EstadoPedido.PREPARACION)
-                    .formaPago(FormaPago.MERCADO_PAGO)
-                    .tipoEnvio(TipoEnvio.DELIVERY)
+                    .estadoPedido(EstadoPedido.PAGADO)
+                    .formaPago(FormaPago.EFECTIVO)
+                    .tipoEnvio(TipoEnvio.TAKE_AWAY)
                     .sucursal(massa1)
                     .domicilio(domicilioCliente)
                     .build();
