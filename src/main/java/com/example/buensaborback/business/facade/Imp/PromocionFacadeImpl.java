@@ -8,6 +8,7 @@ import com.example.buensaborback.business.service.Base.BaseService;
 import com.example.buensaborback.business.service.Imp.PromocionServiceImpl;
 import com.example.buensaborback.business.service.PromocionService;
 import com.example.buensaborback.domain.dto.promocionDto.PromocionDto;
+import com.example.buensaborback.domain.dto.promocionDto.PromocionShortDto;
 import com.example.buensaborback.domain.entities.Promocion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class PromocionFacadeImpl extends BaseFacadeImp<Promocion,PromocionDto,Pr
     @Override
     public List<PromocionDto> findHabilitadasBySucursalId(Long sucursalId){
         return promocionMapper.toDTOsList(promocionService.findHabilitadasBySucursalId(sucursalId));
+    }
+
+    @Override
+    public PromocionShortDto obtenerPorId(Long idPromocion){
+        return promocionMapper.toShortDTO(promocionService.getById(idPromocion));
     }
 
 

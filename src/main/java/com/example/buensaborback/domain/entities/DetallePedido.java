@@ -21,8 +21,16 @@ public class DetallePedido extends Base{
     @ManyToOne
     private Articulo articulo;
 
+    @ManyToOne
+    private Promocion promocion;
+
     public void calculaSubtotal(){
-        this.subTotal = cantidad*articulo.getPrecioVenta();
+
+        if(articulo!=null) {
+            this.subTotal = cantidad * articulo.getPrecioVenta();
+        }else{
+            this.subTotal = cantidad * promocion.getPrecioPromocional();
+        }
     }
 
 }

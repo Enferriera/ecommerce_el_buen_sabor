@@ -13,4 +13,5 @@ import lombok.Setter;
 public class DetallePedidoCreateDto extends BaseDto {
     private int cantidad;
     private Long idArticulo;
+    private Long idPromocion;
 }

@@ -72,41 +72,88 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
     @Override
     public void validarStock(Pedido pedido) throws RuntimeException {
 
-
         for (DetallePedido detalle : pedido.getDetallePedidos()) {
-            Articulo articulo = detalle.getArticulo();
-            int cantidadRequerida = detalle.getCantidad();
 
-            if (articulo instanceof ArticuloInsumo) {
-                ArticuloInsumo insumo = (ArticuloInsumo) articulo;
-                StockInsumoSucursal stock = obtenerStockInsumoSucursal(insumo, pedido.getSucursal());
+            if (detalle.getArticulo() != null) {
+                // Caso de artículo
+                Articulo articulo = detalle.getArticulo();
+                int cantidadRequerida = detalle.getCantidad();
 
-                if (stock.getStockActual() < cantidadRequerida) {
-                    throw new RuntimeException("Stock insuficiente para el artículo: " + insumo.getDenominacion());
-                }
-
-                // Decrementar el stock
-                stock.setStockActual(stock.getStockActual() - cantidadRequerida);
-                stockInsumoSucursalRepository.save(stock);
-
-            } else if (articulo instanceof ArticuloManufacturado) {
-                ArticuloManufacturado manufacturado = articuloManufacturadoService.getById(articulo.getId());
-
-                for (ArticuloManufacturadoDetalle detalleManufacturado : manufacturado.getArticuloManufacturadoDetalles()) {
-                    ArticuloInsumo insumo = detalleManufacturado.getArticuloInsumo();
-                    int cantidadNecesaria = detalleManufacturado.getCantidad() * cantidadRequerida;
+                if (articulo instanceof ArticuloInsumo) {
+                    ArticuloInsumo insumo = (ArticuloInsumo) articulo;
                     StockInsumoSucursal stock = obtenerStockInsumoSucursal(insumo, pedido.getSucursal());
 
-                    if (stock.getStockActual() < cantidadNecesaria) {
+                    if (stock.getStockActual() < cantidadRequerida) {
                         throw new RuntimeException("Stock insuficiente para el artículo: " + insumo.getDenominacion());
                     }
 
                     // Decrementar el stock
-                    stock.setStockActual(stock.getStockActual() - cantidadNecesaria);
+                    stock.setStockActual(stock.getStockActual() - cantidadRequerida);
                     stockInsumoSucursalRepository.save(stock);
+
+                } else if (articulo instanceof ArticuloManufacturado) {
+                    ArticuloManufacturado manufacturado = articuloManufacturadoService.getById(articulo.getId());
+
+                    for (ArticuloManufacturadoDetalle detalleManufacturado : manufacturado.getArticuloManufacturadoDetalles()) {
+                        ArticuloInsumo insumo = detalleManufacturado.getArticuloInsumo();
+                        int cantidadNecesaria = detalleManufacturado.getCantidad() * cantidadRequerida;
+                        StockInsumoSucursal stock = obtenerStockInsumoSucursal(insumo, pedido.getSucursal());
+
+                        if (stock.getStockActual() < cantidadNecesaria) {
+                            throw new RuntimeException("Stock insuficiente para el artículo: " + insumo.getDenominacion());
+                        }
+
+                        // Decrementar el stock
+                        stock.setStockActual(stock.getStockActual() - cantidadNecesaria);
+                        stockInsumoSucursalRepository.save(stock);
+                    }
+                } else {
+                    throw new RuntimeException("Tipo de artículo desconocido: " + articulo.getClass().getName());
                 }
+
+            } else if (detalle.getPromocion() != null) {
+                // Caso de promoción
+                Promocion promocion = detalle.getPromocion();
+                int cantidadRequerida = detalle.getCantidad();
+
+                for (PromocionDetalle promocionDetalle : promocion.getPromocionDetalles()) {
+                    Articulo articulo = promocionDetalle.getArticulo();
+                    int cantidadNecesaria = promocionDetalle.getCantidad() * cantidadRequerida;
+                    if (articulo instanceof ArticuloInsumo) {
+                        ArticuloInsumo insumo = (ArticuloInsumo) articulo;
+                        StockInsumoSucursal stock = obtenerStockInsumoSucursal(insumo, pedido.getSucursal());
+
+                        if (stock.getStockActual() < cantidadNecesaria) {
+                            throw new RuntimeException("Stock insuficiente para el artículo: " + insumo.getDenominacion());
+                        }
+
+                        // Decrementar el stock
+                        stock.setStockActual(stock.getStockActual() - cantidadNecesaria);
+                        stockInsumoSucursalRepository.save(stock);
+
+                    } else if (articulo instanceof ArticuloManufacturado) {
+                        ArticuloManufacturado manufacturado = articuloManufacturadoService.getById(articulo.getId());
+
+                        for (ArticuloManufacturadoDetalle detalleManufacturado : manufacturado.getArticuloManufacturadoDetalles()) {
+                            ArticuloInsumo insumo = detalleManufacturado.getArticuloInsumo();
+                            int cantidadNecesariaManufacturado = detalleManufacturado.getCantidad() * cantidadRequerida;
+                            StockInsumoSucursal stock = obtenerStockInsumoSucursal(insumo, pedido.getSucursal());
+
+                            if (stock.getStockActual() < cantidadNecesariaManufacturado) {
+                                throw new RuntimeException("Stock insuficiente para el artículo: " + insumo.getDenominacion());
+                            }
+
+                            // Decrementar el stock
+                            stock.setStockActual(stock.getStockActual() - cantidadNecesariaManufacturado);
+                            stockInsumoSucursalRepository.save(stock);
+                        }
+                    } else {
+                        throw new RuntimeException("Tipo de artículo desconocido: " + articulo.getClass().getName());
+                    }
+                }
+
             } else {
-                throw new RuntimeException("Tipo de artículo desconocido: " + articulo.getClass().getName());
+                throw new RuntimeException("El detalle del pedido no tiene artículo ni promoción.");
             }
         }
     }
@@ -126,17 +173,50 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
                     if (detalle.getArticulo() instanceof ArticuloManufacturado) {
                         ArticuloManufacturado articuloManufacturado = (ArticuloManufacturado) detalle.getArticulo();
                         return articuloManufacturado.getTiempoEstimadoMinutos();
+                    } else if (detalle.getArticulo() instanceof ArticuloInsumo) {
+                        // No hay tiempo estimado para ArticuloInsumo, asumimos 0
+                        return 0;
+                    } else if (detalle.getPromocion() != null) {
+                        // Si es una promoción, suma los tiempos estimados de los artículos en la promoción
+                        Promocion promocion = detalle.getPromocion();
+                        return promocion.getPromocionDetalles().stream()
+                                .mapToInt(promocionDetalle -> {
+                                    Articulo articulo = promocionDetalle.getArticulo();
+                                    if (articulo instanceof ArticuloManufacturado) {
+                                        return ((ArticuloManufacturado) articulo).getTiempoEstimadoMinutos();
+                                    } else {
+                                        return 0; // Asumimos 0 para ArticuloInsumo en promociones también
+                                    }
+                                })
+                                .sum();
                     } else {
                         return 0;
                     }
                 })
                 .sum();
+
         int tiempoCocina = obtenerPedidosEnCocina(pedido.getSucursal().getId()).stream()
                 .flatMap(p -> p.getDetallePedidos().stream())
                 .mapToInt(detalle -> {
                     if (detalle.getArticulo() instanceof ArticuloManufacturado) {
                         ArticuloManufacturado articuloManufacturado = (ArticuloManufacturado) detalle.getArticulo();
                         return articuloManufacturado.getTiempoEstimadoMinutos();
+                    } else if (detalle.getArticulo() instanceof ArticuloInsumo) {
+                        // No hay tiempo estimado para ArticuloInsumo, asumimos 0
+                        return 0;
+                    } else if (detalle.getPromocion() != null) {
+                        // Si es una promoción, suma los tiempos estimados de los artículos en la promoción
+                        Promocion promocion = detalle.getPromocion();
+                        return promocion.getPromocionDetalles().stream()
+                                .mapToInt(promocionDetalle -> {
+                                    Articulo articulo = promocionDetalle.getArticulo();
+                                    if (articulo instanceof ArticuloManufacturado) {
+                                        return ((ArticuloManufacturado) articulo).getTiempoEstimadoMinutos();
+                                    } else {
+                                        return 0; // Asumimos 0 para ArticuloInsumo en promociones también
+                                    }
+                                })
+                                .sum();
                     } else {
                         return 0;
                     }
@@ -144,12 +224,13 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
                 .sum();
 
         int cantidadCocineros = contarCocineros(pedido.getSucursal().getId());
-        //Si no hay cocineros disponibles, devuelve 0
+        // Si no hay cocineros disponibles, devuelve 0
         int tiempoCocinaPromedio = cantidadCocineros > 0 ? tiempoCocina / cantidadCocineros : 0;
 
         int tiempoDelivery = pedido.getTipoEnvio() == TipoEnvio.DELIVERY ? 10 : 0;
         pedido.setHoraEstimadaFinalizacion(LocalTime.now().plusMinutes(tiempoArticulos + tiempoCocinaPromedio + tiempoDelivery));
     }
+
 
     @Override
     public List<Pedido> obtenerPedidosEnCocina(Long idSucursal) {
@@ -165,8 +246,11 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
 
     private void calcularTotalCosto(Pedido pedido) {
         double totalCosto = 0.0;
+
         for (DetallePedido detalle : pedido.getDetallePedidos()) {
             Articulo articulo = detalle.getArticulo();
+            Promocion promocion = detalle.getPromocion();
+
             if (articulo instanceof ArticuloInsumo) {
                 ArticuloInsumo insumo = (ArticuloInsumo) articulo;
                 totalCosto += detalle.getCantidad() * insumo.getPrecioCompra();
@@ -174,12 +258,30 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
                 ArticuloManufacturado manufacturado = (ArticuloManufacturado) articulo;
                 for (ArticuloManufacturadoDetalle detalleManufacturado : manufacturado.getArticuloManufacturadoDetalles()) {
                     ArticuloInsumo insumo = detalleManufacturado.getArticuloInsumo();
-                    totalCosto += detalleManufacturado.getCantidad() * insumo.getPrecioCompra();
+                    totalCosto += detalle.getCantidad() * detalleManufacturado.getCantidad() * insumo.getPrecioCompra();
                 }
+            } else if (promocion != null) {
+                for (PromocionDetalle promocionDetalle : promocion.getPromocionDetalles()) {
+                    Articulo articuloPromocion = promocionDetalle.getArticulo();
+                    if (articuloPromocion instanceof ArticuloInsumo) {
+                        ArticuloInsumo insumo = (ArticuloInsumo) articuloPromocion;
+                        totalCosto += detalle.getCantidad() * promocionDetalle.getCantidad() * insumo.getPrecioCompra();
+                    } else if (articuloPromocion instanceof ArticuloManufacturado) {
+                        ArticuloManufacturado manufacturado = (ArticuloManufacturado) articuloPromocion;
+                        for (ArticuloManufacturadoDetalle detalleManufacturado : manufacturado.getArticuloManufacturadoDetalles()) {
+                            ArticuloInsumo insumo = detalleManufacturado.getArticuloInsumo();
+                            totalCosto += detalle.getCantidad() * promocionDetalle.getCantidad() * detalleManufacturado.getCantidad() * insumo.getPrecioCompra();
+                        }
+                    } else {
+                        throw new RuntimeException("Tipo de artículo desconocido en Promoción: " + articuloPromocion.getClass().getName());
+                    }
+                }
+            } else {
+                throw new RuntimeException("Tipo de artículo desconocido: " + articulo.getClass().getName());
             }
         }
-        pedido.setTotalCosto(totalCosto);
 
+        pedido.setTotalCosto(totalCosto);
     }
 
 
@@ -190,7 +292,7 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
 
 
     @Override
-    public void revertirStock(Pedido pedido) throws RuntimeException {
+    public void revertirStock(Pedido pedido) {
         for (DetallePedido detalle : pedido.getDetallePedidos()) {
             Articulo articulo = detalle.getArticulo();
             int cantidadRequerida = detalle.getCantidad();
@@ -204,7 +306,7 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
                 stockInsumoSucursalRepository.save(stock);
 
             } else if (articulo instanceof ArticuloManufacturado) {
-                ArticuloManufacturado manufacturado = articuloManufacturadoService.getById(articulo.getId());
+                ArticuloManufacturado manufacturado = (ArticuloManufacturado) articulo;
 
                 for (ArticuloManufacturadoDetalle detalleManufacturado : manufacturado.getArticuloManufacturadoDetalles()) {
                     ArticuloInsumo insumo = detalleManufacturado.getArticuloInsumo();
@@ -214,6 +316,33 @@ public class PedidoServiceImpl extends BaseServiceImp<Pedido, Long> implements P
                     // Incrementar el stock
                     stock.setStockActual(stock.getStockActual() + cantidadNecesaria);
                     stockInsumoSucursalRepository.save(stock);
+                }
+            } else if (detalle.getPromocion() != null) {
+                Promocion promocion = detalle.getPromocion();
+
+                for (PromocionDetalle promocionDetalle : promocion.getPromocionDetalles()) {
+                    Articulo articuloPromocion = promocionDetalle.getArticulo();
+                    if (articuloPromocion instanceof ArticuloInsumo) {
+                        ArticuloInsumo insumo = (ArticuloInsumo) articuloPromocion;
+                        StockInsumoSucursal stock = obtenerStockInsumoSucursal(insumo, pedido.getSucursal());
+
+                        // Incrementar el stock
+                        stock.setStockActual(stock.getStockActual() + detalle.getCantidad() * promocionDetalle.getCantidad());
+                        stockInsumoSucursalRepository.save(stock);
+                    } else if (articuloPromocion instanceof ArticuloManufacturado) {
+                        ArticuloManufacturado manufacturado = (ArticuloManufacturado) articuloPromocion;
+
+                        for (ArticuloManufacturadoDetalle detalleManufacturado : manufacturado.getArticuloManufacturadoDetalles()) {
+                            ArticuloInsumo insumo = detalleManufacturado.getArticuloInsumo();
+                            StockInsumoSucursal stock = obtenerStockInsumoSucursal(insumo, pedido.getSucursal());
+
+                            // Incrementar el stock
+                            stock.setStockActual(stock.getStockActual() + detalle.getCantidad() * promocionDetalle.getCantidad() * detalleManufacturado.getCantidad());
+                            stockInsumoSucursalRepository.save(stock);
+                        }
+                    } else {
+                        throw new RuntimeException("Tipo de artículo desconocido en Promoción: " + articuloPromocion.getClass().getName());
+                    }
                 }
             } else {
                 throw new RuntimeException("Tipo de artículo desconocido: " + articulo.getClass().getName());
