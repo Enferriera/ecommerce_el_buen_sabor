@@ -37,6 +37,16 @@ public class PromocionServiceImpl extends BaseServiceImp<Promocion,Long> impleme
         return promocionRepository.findHabilitadasBySucursalId(sucursalId);
     }
 
+    @Override
+    public Promocion mapIdToPromocion(Long idPromocion){
+        if (idPromocion == null) {
+            return null;
+        }
+        return promocionRepository.getById(idPromocion);
+    }
 
-
+    @Override
+    public Promocion getById(Long idPromocion){
+        return promocionRepository.getById(idPromocion);
+    }
 }

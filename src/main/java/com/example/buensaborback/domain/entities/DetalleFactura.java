@@ -24,9 +24,13 @@ public class DetalleFactura extends Base {
 
     private Double subtotal;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "id_articulo")
     private Articulo articulo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_promocion")
+    private Promocion promocion;
 
 
 
