@@ -11,6 +11,8 @@ import com.example.buensaborback.domain.entities.*;
 import com.example.buensaborback.domain.enums.FormaPago;
 import com.example.buensaborback.repositories.DetallePedidoRepository;
 import com.example.buensaborback.repositories.FacturaRepository;
+import com.example.buensaborback.repositories.PedidoRepository;
+import jakarta.transaction.Transactional;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -34,6 +36,9 @@ public class FacturaServiceImpl extends BaseServiceImp<Factura,Long> implements 
     private FacturaRepository facturaRepository;
     @Autowired
     private DetallePedidoRepository detallePedidoRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @Autowired
     private DetalleFacturaServiceImpl   detalleFacturaService;
@@ -161,29 +166,31 @@ public class FacturaServiceImpl extends BaseServiceImp<Factura,Long> implements 
 
 
     @Override
-    public Factura saveFacturaAfterPagoEfectivo(Pedido pedido) throws ServicioException {
+    @Transactional
+    public Factura saveFacturaAfterPagoEfectivo(Pedido pedido) {
         if(facturaRepository.existsByPedidoId(pedido.getId())) {
-            throw new ServicioException("Ya existe una factura para el pedido dado.");
+            throw new RuntimeException("Ya existe una factura para el pedido dado.");
         }
 
         Factura factura = new Factura();
-
         factura.setFechaFacturacion(pedido.getFechaPedido());
         factura.setTotalVenta(pedido.getTotal());
         factura.setFormaPago(FormaPago.EFECTIVO);
 
-       factura = facturaRepository.save(factura);
+        //facturaRepository.save(factura);
 
         List<DetallePedido> detallesPedidos = detallePedidoRepository.findAllByPedidoId(pedido.getId());
-        Set<DetalleFactura> detallesFactura= new HashSet<>();
+        Set<DetalleFactura> detallesFactura = new HashSet<>();
         for(DetallePedido detallePedido : detallesPedidos) {
-            detallesFactura.add(detalleFacturaService.saveDetalleFromPedido(detallePedido));
+            DetalleFactura detalleFactura = detalleFacturaService.saveDetalleFromPedido(detallePedido);
+            detallesFactura.add(detalleFactura);
         }
         factura.setDetalleFacturas(detallesFactura);
 
-        factura = facturaRepository.save(factura);
-
-        return factura;
+        Factura savedFactura = facturaRepository.save(factura);
+        pedido.setFactura(savedFactura);
+        pedidoRepository.save(pedido);
+        return savedFactura;
     }
 
     @Override
