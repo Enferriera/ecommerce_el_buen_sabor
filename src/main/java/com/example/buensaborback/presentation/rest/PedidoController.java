@@ -31,11 +31,13 @@ public class PedidoController extends BaseControllerImp<Pedido, PedidoDto, Pedid
     private MercadoPagoFacade preference;
 
     @PostMapping("/create_preference_mp")
-    public ResponseEntity<PreferenceMP> crearPreferenciaMercadoPago(@RequestBody PedidoDto pedido){
+    public PreferenceMP crearPreferenciaMercadoPago(@RequestBody PedidoDto pedido){
 
 
-        return ResponseEntity.ok().body(preference.crearPreference(pedido));
+        return preference.crearPreference(pedido);
     }
+
+
 
     @PostMapping("/create")
     public ResponseEntity<PedidoDto> create(@RequestBody PedidoCreateDto dto) {
