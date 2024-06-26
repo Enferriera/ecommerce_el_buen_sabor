@@ -31,7 +31,7 @@ public class BuenSaborBackApplication {
         SpringApplication.run(BuenSaborBackApplication.class, args);
         logger.info("INICIADO");
     }
-
+/*
     @Autowired
     private ClienteRepository clienteRepository;
     @Autowired
@@ -988,4 +988,6 @@ public class BuenSaborBackApplication {
             categoriaRepository.save(categoria);
         };
     }
+
+ */
 }
