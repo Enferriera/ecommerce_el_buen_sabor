@@ -31,8 +31,8 @@ public class MercadoPagoController {
 
             items.add(itemRequest);
 
-            PreferenceBackUrlsRequest backURL = PreferenceBackUrlsRequest.builder().success("http://localhost:5173/mpsuccess")
-                    .pending("http://localhost:5173/mppending").failure("http://localhost:5173/mpfailure").build();
+            PreferenceBackUrlsRequest backURL = PreferenceBackUrlsRequest.builder().success("http://localhost:5174/mp/success")
+                    .pending("http://localhost:5174/mp/pending").failure("http://localhost:5174/mp/failure").build();
 
             List<PreferencePaymentMethodRequest> excludedPaymentMethods = new ArrayList<>();
             excludedPaymentMethods.add(PreferencePaymentMethodRequest.builder().id("argencard").build());

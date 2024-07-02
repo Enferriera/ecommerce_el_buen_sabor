@@ -2,7 +2,7 @@ package com.example.buensaborback.domain.enums;
 
 public enum Rol {
     ADMIN,
-    CLIENTE,
+    GERENTE,
     COCINERO,
     CAJERO,
     DELIVERY
